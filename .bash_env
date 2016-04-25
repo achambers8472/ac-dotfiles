@@ -4,13 +4,12 @@ unset BASH_ENV
 umask 022
 export TMOUT=0
 export AC_GIT_DIR="$HOME/git"
-export AC_CFG_DIR="${AC_GIT_DIR}/ac-essentials"
+export AC_ESSENTIALS_DIR="${AC_GIT_DIR}/ac-essentials"
 export AC_BASH_DIR="${AC_GIT_DIR}/ac-bash"
 export AC_PYTHON_DIR="${AC_GIT_DIR}/ac-python"
 export AC_PYTHON_OLD_DIR="${AC_GIT_DIR}/ac-python-old"
 export AC_TEX_DIR="${AC_GIT_DIR}/ac-tex"
 export AC_CHROMA_UTILS_DIR="${AC_GIT_DIR}/ac-chroma-utils"
-export AC_UTILS_DIR="${AC_GIT_DIR}/ac-utils"
 
 ac-envvar-push-front() {
     local varname="${1}"
@@ -38,7 +37,7 @@ ac-envvar-push-front() {
 # }
 
 ac-envvar-push-front PATH \
-	       "${AC_UTILS_DIR}" \
+	       "${AC_ESSENTIALS_DIR}/bin" \
 	       "${AC_BASH_DIR}" \
 	       "${AC_CHROMA_UTILS_DIR}" \
 	       "$HOME/bin" \

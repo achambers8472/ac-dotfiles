@@ -18,7 +18,7 @@ shopt -s histappend
 alias ls='ls --color=auto'
 alias emacs='emacs -nw'
 
-eval "$(dircolors ${AC_CFG_DIR}/dircolors/dircolors.ansi-light)"
+eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 
 case "$(ac-hostname)" in
     eddie)
