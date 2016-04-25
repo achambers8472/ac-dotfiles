@@ -1,0 +1,27 @@
+*.swp
+*~
+*#*#
+
+.thunderbird/achambers/*
+.thunderbird/Crash\ Reports
+
+.ssh/id_rsa
+.ssh/id_rsa.pub
+.ssh/known_hosts
+.ssh/id_dsa
+.ssh/id_dsa.pub
+.ssh/authorized_keys
+
+.vim/view
+.vim/.netrwhist
+.vim/bundle/*
+
+.emacs.d/elpa
+.emacs.d/ido.last
+.emacs.d/smex-items
+.emacs.d/ac-custom.el
+.emacs.d/tramp
+.emacs.d/.python-environments
+.emacs.d/anaconda-mode
+.emacs.d/bookmarks
+.emacs.d/auto-save-list

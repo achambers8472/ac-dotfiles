@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+cp chroma_baryon.lst chroma_baryon.lst.bak
+
+while read limefile
+do
+	echo ${limefile} > chroma_baryon.lst
+	make
+	if grep nan evxpt.res
+	then
+		echo ${limefile} >> badlist
+	fi
+	rm evxpt.res qa.log
+done < chroma_baryon.lst.bak
+
+mv chroma_baryon.lst.bak chroma_baryon.lst

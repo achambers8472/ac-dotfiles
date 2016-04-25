@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit
+
+rsync \
+	--archive \
+	--verbose \
+	--progress \
+	--partial \
+	--human-readable \
+	--compress \
+	"$@"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit 1
+
+echo "----------------------------------------"

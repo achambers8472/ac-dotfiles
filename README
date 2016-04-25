@@ -1,0 +1,9 @@
+Vim
+---
+~/.vim --> .vim
+~/.vimrc --> .vimrc
+Need to init submodules in .vim/bundle directory and pull them.
+Make sure ruby, ruby-dev are installed and vim is compiled with ruby support.
+Need to go to .vim/bundle/command-t/ruby/command-t and run.
+	ruby extconf.rb
+	make

@@ -1,0 +1,211 @@
+" Plugins {{{
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+Plugin 'gmarik/vundle'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
+"Plugin 'vim-latex/vim-latex'
+Plugin 'tpope/vim-surround'
+Plugin 'beloglazov/vim-online-thesaurus'
+Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'Yggdroot/indentLine'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+"Plugin 'luochen1990/rainbow'
+"Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tomasr/molokai'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'ervandew/supertab'
+call vundle#end()
+filetype indent plugin on
+syntax on
+" }}}
+
+" Easymotion setup {{{
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+" }}}
+" NERDTree setup {{{
+" }}}
+" airline setup {{{
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#whitespace#enabled = 0
+" }}}
+" vim-latex setup {{{
+let g:tex_flavor='latex'
+let g:Tex_BIBINPUTS=expand('~/git/tex')
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_ViewRule_pdf='evince'
+let g:Imap_UsePlaceHolders=0
+" }}}
+" NERDCommenter setup {{{
+let g:NERDCreateDefaultMappings = 0
+" }}}
+" luochen/rainbow setup {{{
+let g:rainbow_active = 1
+" }}}
+
+" Leader keys {{{
+let mapleader = ","
+let maplocalleader = "\\"
+" }}}
+
+" Global options {{{
+" Show characters to indicate whitespace
+set list
+" Keep indentation from previous line
+set autoindent
+set backspace=indent,eol,start
+" complete changes where vim scans for auto-completion
+set complete-=i
+" Inserted tabs are ACTUALLY tabs
+set noexpandtab
+" Existings tabs are shown to be 4 columns wide
+set tabstop=4
+" Tabs I put in are made of tabs
+set softtabstop=4
+" Using > and < to shift indent always rounds to a multiple of 4
+set shiftround
+set shiftwidth=4
+" smarttab just changes how clever vim is about inserting tabs
+set smarttab
+" Wait 100ms for next character in sequence (when ambiguous)
+set ttimeout
+set ttimeoutlen=100
+" Start showing search results immediately
+set incsearch
+" Show statusbar all the time!
+set laststatus=2
+" Show cursor position
+set ruler
+set showcmd
+" Enhance command completion
+set wildmenu
+set wildmode=list:longest
+" Show at least 1 line above and below cursor
+set scrolloff=10
+" Same as above for columns
+set sidescrolloff=5
+set display+=lastline
+" Changes how whitespace characters are shown when 'list' active
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set nolist
+" If file is changed outside vim, read it again and show changes
+set autoread
+" Increase command history size to 1000
+set history=1000
+" Increase maximum number of tabs
+set tabpagemax=50
+set foldlevelstart=0
+" Search Options
+set hlsearch
+set ignorecase
+set smartcase
+" Tab options
+set wrap
+set number
+set numberwidth=4
+set linebreak
+" Display options
+if exists('&colorcolumn')
+	set colorcolumn=72
+else
+	2mat ErrorMsg '\%72v.'
+endif
+set viewoptions=folds,cursor
+"}}}
+
+" GUI options {{{
+set background=light
+set t_Co=16
+colorscheme solarized
+"colorscheme molokai
+set guioptions=a
+set guifont=Inconsolata\ Medium\ 14
+set guiheadroom=0
+if has('gui_running')
+	colorscheme molokai
+	set encoding=utf-8
+	set lines=999 columns=999
+endif
+"highlight Search cterm=NONE ctermfg=white ctermbg=black
+" }}}
+
+" Insert mode mappings {{{
+inoremap jk <esc>
+inoremap Jk <esc>
+inoremap jK <esc>
+inoremap JK <esc>
+" }}}
+" Normal/Visual/Operator-Pending mappings {{{
+noremap H 0
+noremap L $
+map <space> <Plug>(easymotion-s)
+" }}}
+" Normal mode mappings {{{
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>- ddp
+nnoremap <leader>_ ddkP
+nnoremap <enter> o<esc>k
+nnoremap <s-enter> O<esc>j
+nnoremap <tab> :bnext!<enter>
+nnoremap <s-tab> :bprevious!<enter>
+nnoremap qq @w
+nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>c <plug>NERDCommenterToggle
+" }}}
+" Visual mode mappings {{{
+vnoremap <leader>ev :vsplit $MYVIMRC<cr>
+vnoremap <leader>sv :source $MYVIMRC<cr>
+vnoremap <tab> :bnext<enter>
+vmap <leader>n :NERDTreeToggle<cr>
+vmap <leader>c <plug>NERDCommenterToggle
+" }}}
+" Operator-pending mappings {{{
+" }}}
+" Training mappings {{{
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+inoremap <esc> <nop>
+" }}}
+
+" Autocommands {{{
+function TrimWhitespace()
+	let old_cursor_position = getpos('.')
+	:%s/\s\+$//e
+	:silent! %s#\($\n\s*\)\+\%$##
+	call setpos('.',old_cursor_position)
+endfunction
+
+augroup global
+	autocmd!
+	autocmd BufWrite * :filetype detect
+	autocmd BufWritePre * call TrimWhitespace()
+	autocmd BufEnter * silent! lcd %:p:h
+	autocmd BufWinLeave *.* mkview
+	autocmd BufWinEnter *.* silent loadview
+augroup END
+"  }}}
+
+" Abbreviations {{{
+iabbrev @@ alexander.chambers@adelaide.edu.au
+" }}}

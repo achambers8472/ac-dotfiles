@@ -1,0 +1,254 @@
+#!/usr/bin/env python
+
+import sys
+import matplotlib.pyplot as pyplot
+import evxpt2
+import numpy
+import analysis
+import time
+import os
+import functions2
+import re
+
+pyplot.ion()
+
+
+class Script(object):
+
+    def __init__(self):
+
+        self.dump_file = evxpt2.parse(sys.argv[1])
+
+        self.n_corrs = len(self.dump_file['result_parameter'])
+        self.nt = self.dump_file['ensemble']['nt']
+
+        self.t_corr = numpy.arange(self.nt)
+        self.t_em = numpy.arange(0.5,self.nt-0.5)
+
+        self.corr = None
+        self.corr_error = None
+        self.corr_boot = None
+        self.em = None
+        self.em_error = None
+        self.em_boot = None
+
+
+        self.result_options = [
+                'c0r',
+                'c1r/c0r',
+                '(c2r+c3r)/(c0r+c1r)',
+                'Custom']
+
+        self.main_menu_options = [
+                ('Change result', self.change_result),
+                ('Change function', self.change_function),
+                ('Fix parameter', self.fix_parameter),
+                ('Unfix parameter', self.unfix_parameter),
+                ('Plot correlator', self.plot_correlator),
+                ('Plot effective mass', self.plot_effective_mass),
+                ('Fit correlator', self.fit_correlator),
+                ('Window start analysis', self.window_start_analysis),
+                #('Analyse window', self.analyse_window),
+                ('Exit', exit),
+                ]
+
+        self.function_options = [
+                ('Exponential', functions2.Exponential),
+                ('Tangent', functions2.Tangent),
+                ]
+
+        self.bin_size = 5
+        self.n_bootstraps = 200
+        self.result_string = 'c0r'
+        self.function = functions2.Exponential()
+
+        self.generate_result()
+
+    def print_state(self):
+        print 'Result:', self.result_string
+        print 'Function:', self.function.name
+        print 'Fixed Parameters:'
+        for i in self.function.fixed_parameters():
+            print i, self.function.fixed_parameters()[i]
+
+    def main_menu(self):
+        os.system('clear')
+        self.print_state()
+        for i, (option, func) in enumerate(self.main_menu_options):
+            print repr(i)+'.', option
+        choice = int(raw_input('Pick an option: '))
+        self.main_menu_options[choice][1]()
+
+    def change_result(self):
+        for i, result in enumerate(self.result_options):
+            print repr(i)+'.', result
+        choice = int(raw_input('Pick a result: '))
+        if self.result_options[choice] == 'Custom':
+            self.result_string = raw_input('Enter desired result: ')
+        else:
+            self.result_string = self.result_options[choice]
+        self.generate_result()
+
+    def generate_result(self):
+        corrs = {}
+        corr_errors = {}
+        corr_boots = {}
+        ems = {}
+        em_errors = {}
+        em_boots = {}
+
+        present_numbers = set([i for i in re.findall(
+            r'(c\d+[r|i])', self.result_string)])
+
+        comb_eval = self.result_string
+        for spec in present_numbers:
+            c = spec[-1]
+            if c == 'r':
+                comp = 'real'
+            elif c == 'i':
+                comp = 'imag'
+            i = int(spec[1:-1])
+            corrs[i], corr_errors[i], corr_boots[i] = evxpt2.process_dump(
+                self.dump_file,
+                i,
+                comp,
+                self.bin_size,
+                self.n_bootstraps)
+
+            comb_eval = comb_eval.replace(
+                    'c'+repr(i)+c,
+                    'x['+repr(i)+']')
+
+        print comb_eval
+
+        x = corrs
+        self.corr = eval(comb_eval)
+        x = corr_boots
+        self.corr_boot = eval(comb_eval)
+        self.corr_error = numpy.std(self.corr_boot,axis=0,ddof=1)
+
+        self.em, self.em_error, self.em_boot = analysis.effective_mass(
+                self.corr,
+                self.corr_error,
+                self.corr_boot)
+
+    def change_function(self):
+        for i, (option, func) in enumerate(self.function_options):
+            print repr(i)+'.', option
+        choice = raw_input('Pick a function: ')
+        self.function = self.function_options[i][1]()
+
+    def fix_parameter(self):
+        choice = raw_input('Pick parameter to fix and value: ')
+        choice = [x.strip() for x in choice.split()]
+        par = int(choice[0])
+        val = float(choice[1])
+        self.function.fix_parameter(par,val)
+
+    def unfix_parameter(self):
+        choice = int(raw_input('Pick parameter to free: ').strip())
+        self.function.unfix_parameter(choice)
+
+    def plot_correlator(self):
+        pyplot.errorbar(
+                self.t_corr,
+                self.corr,
+                yerr=self.corr_error,
+                linestyle='',
+                marker='o',
+                markersize=2)
+        pyplot.xlim((0,63))
+        pyplot.draw()
+
+    def plot_effective_mass(self):
+        pyplot.errorbar(
+                self.t_em,
+                self.em,
+                yerr=self.em_error,
+                linestyle='',
+                marker='o',
+                markersize=2)
+        pyplot.xlim((0,63))
+        pyplot.draw()
+
+    def wait_for_user(self):
+        throwaway = raw_input('Press ENTER to continue...')
+
+    def fit_correlator(self):
+        p, p_cov, p_boot = analysis.fit_correlator(
+                self.corr,
+                self.corr_error,
+                self.corr_boot,
+                self.function,
+                [9,16])
+        p_error = analysis.cov_to_std(p_cov)
+        for pi,pei in zip(p, p_error):
+            print pi, '+/-', pei
+        self.wait_for_user()
+
+    def window_start_analysis(self):
+        choices = raw_input('Enter start and max times: ').split()
+        t_start = int(choices[0].strip())
+        t_max = int(choices[1].strip())
+        t_list = numpy.array([
+            [t_start,t_end]
+            for t_end in
+            xrange(t_start + self.function.n_parameters, t_max + 1)])
+        p_list, p_cov_list, p_boot_list = analysis.window_analysis(
+                self.corr,
+                self.corr_error,
+                self.corr_boot,
+                self.function,
+                t_list)
+        p_error_list = analysis.cov_to_std(p_cov_list)
+        pyplot.errorbar(t_list[:,1],p_list[:,1],yerr=p_error_list[:,1],
+                linestyle='',
+                marker='o',
+                markersize=2)
+        #pyplot.xlim((0,63))
+        pyplot.draw()
+
+    #elif user_input == '7':
+        #t_start = 5
+        #t_max = 32
+        #function = functions2.Exponential()
+        #n_par = function.n_parameters
+        #p_list, p_cov_list, p_boot_list = analysis.window_analysis(
+                #current_corr,
+                #current_corr_error,
+                #current_corr_boot,
+                #functions2.Exponential(),
+                #t_list)
+        #p_error_list = analysis.cov_to_std(p_cov_list)
+        #pyplot.errorbar(t_list[:,1],p_list[:,1],yerr=p_error_list[:,1],
+                #linestyle='',
+                #marker='o',
+                #markersize=2)
+        ##pyplot.xlim((0,63))
+        #pyplot.draw()
+    #elif user_input == '7':
+        #t_min = 5
+        #t_end = 20
+        #function = functions2.Exponential()
+        #n_par = function.n_parameters
+        #t_list = numpy.array([
+            #[t_start,t_end]
+            #for t_start in xrange(t_min, t_end - n_par + 1) ])
+        #p_list, p_error_list, p_boot_list = analysis.window_analysis(
+                #current_corr,
+                #current_corr_error,
+                #current_corr_boot,
+                #functions2.Exponential(),
+                #t_list)
+        #pyplot.errorbar(t_list[:,0],p_list[:,1],yerr=p_error_list[:,1],
+                #linestyle='',
+                #marker='o',
+                #markersize=2)
+        ##pyplot.xlim((0,63))
+        #pyplot.draw()
+
+script = Script()
+while True:
+    script.main_menu()
+
+#pyplot.errorbar(t,corr,yerr=corr_error)

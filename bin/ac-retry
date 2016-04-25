@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit 1
+
+while ! "$@" ; do
+	echo "Error running command '$@'"
+	echo "Retrying in 10 seconds ..."
+	sleep 10
+done

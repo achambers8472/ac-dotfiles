@@ -1,0 +1,59 @@
+old_bash_env="${BASH_ENV}"
+unset BASH_ENV
+
+umask 022
+export TMOUT=0
+export AC_GIT_DIR="$HOME/git"
+export AC_CFG_DIR="${AC_GIT_DIR}/cfg"
+export AC_BASH_DIR="${AC_GIT_DIR}/ac-bash"
+export AC_PYTHON_DIR="${AC_GIT_DIR}/ac-python"
+export AC_PYTHON_OLD_DIR="${AC_GIT_DIR}/ac-python-old"
+export AC_TEX_DIR="${AC_GIT_DIR}/ac-tex"
+export AC_CHROMA_UTILS_DIR="${AC_GIT_DIR}/ac-chroma-utils"
+export AC_UTILS_DIR="${AC_GIT_DIR}/ac-utils"
+
+ac-envvar-push-front() {
+    local varname="${1}"
+    shift
+    for ((i=$#;i>0;i--)) ; do
+        newvalue="${!i}"
+	if [[ -z "${!varname:-}" ]] ; then
+	    export "${varname}"="${newvalue}:"
+	elif [[ ":${!varname}:" != *":${newvalue}:"* ]] ; then
+	    export "${varname}"="${newvalue}:${!varname}"
+	fi
+    done
+}
+
+# ac-envvar-push-back() {
+#     local varname="${1}"
+#     shift
+#     for newvalue in "$@" ; do
+# 	if [[ -z "${!varname:-}" ]] ; then
+# 	    export "${varname}"="${newvalue}:"
+# 	elif [[ ":${!varname}:" != *":${newvalue}:"* ]] ; then
+# 	    export "${varname}"="${!varname}:${newvalue}"
+# 	fi
+#     done
+# }
+
+ac-envvar-push-front PATH \
+	       "${AC_UTILS_DIR}" \
+	       "${AC_BASH_DIR}" \
+	       "${AC_CHROMA_UTILS_DIR}" \
+	       "$HOME/bin" \
+	       "$HOME/local/bin" \
+	       "$HOME/.local/bin" \
+	       "$HOME/local/anaconda/bin" \
+
+ac-envvar-push-front MANPATH \
+	       "${HOME}/man" \
+	       "${HOME}/share/man"
+
+ac-envvar-push-front PYTHONPATH "." "${AC_PYTHON_DIR}" "${AC_PYTHON_OLD_DIR}"
+
+ac-envvar-push-front TEXINPUTS "." "${AC_TEX_DIR}//"
+ac-envvar-push-front BIBINPUTS "." "${AC_TEX_DIR}"
+ac-envvar-push-front BSTINPUTS "." "${AC_TEX_DIR}"
+
+export BASH_ENV="${old_bash_env}"

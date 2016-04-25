@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit 1
+
+tmp_output="$(mktemp tmp.XXXXXXXXXX)"
+python -m cProfile -o "${tmp_output}" $@
+runsnake "${tmp_output}"
+rm "${tmp_output}"

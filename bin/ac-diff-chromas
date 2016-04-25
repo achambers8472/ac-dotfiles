@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit 1
+
+chroma1="$1"
+chroma2="$2"
+
+ac-print-heading "Preparation"
+echo "Creating temporary files..."
+ac-create-temp-files \
+	tmp1 \
+	tmp2 \
+	difftmp \
+	modtmp
+
+ac-print-heading "Diff Calculation"
+
+echo "Calculating diff..."
+diff -qrwbB "${chroma1}" "${chroma2}" \
+	| sed \
+	-e '/\~ /d' \
+	-e '/\.git/d' \
+	-e '/other_libs/d' \
+	| sort \
+	> "${difftmp}" || true
+
+echo "Separating out modified files..."
+awk '/Files.*and.*differ/ { print $2,$4 }' "${difftmp}" > "${modtmp}"
+
+echo "Separating out files without a partner..."
+awk '/Only in chroma_cpu_new.*/ { print substr($3,0,length($3)-1) "/" $4 }' "${difftmp}" > unique
+
+rm actual_modified || true
+
+echo "Chucking out trivial differences..."
+while read -a words
+do
+	sed \
+		-e 's/std::string/string/g' \
+		-e 's/std::endl/endl/g' \
+		-e 's/std::vector/vector/g' \
+		-e 's/std::flush/flush/g' \
+		-e 's/std::ostringstream/ostringstream/g' \
+		-e 's/std::map/map/g' \
+		-e 's/std::bad_cast/bad_cast/g' \
+		-e 's/std::stringstream/stringstream/g' \
+		-e 's/using namespace std\;//g' \
+		-e '/#ifndef QDP_IS_QDPJIT/d' \
+		-e '/#endif/d' \
+		-e 's://.*$::g' \
+	"${words[0]}" > "${tmp1}"
+	sed -e 's/std::string/string/g' \
+		-e 's/std::endl/endl/g' \
+		-e 's/std::vector/vector/g' \
+		-e 's/std::flush/flush/g' \
+		-e 's/std::ostringstream/ostringstream/g' \
+		-e 's/std::map/map/g' \
+		-e 's/std::bad_cast/bad_cast/g' \
+		-e 's/std::stringstream/stringstream/g' \
+		-e 's/using namespace std\;//g' \
+		-e '/#ifndef QDP_IS_QDPJIT/d' \
+		-e '/#endif/d' \
+		-e 's://.*$::g' \
+	"${words[1]}" > "${tmp2}"
+	if ! diff -qwbB "${tmp1}" "${tmp2}" > /dev/null
+	then
+		echo ${words[@]} >> actual_modified
+	fi
+done < "${modtmp}"

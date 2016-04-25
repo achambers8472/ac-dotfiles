@@ -1,0 +1,10 @@
+[user]
+	name = Alexander Chambers
+	email = alexander.chambers@hotmail.com
+[core]
+	editor = emacs -nw
+	pager = less -r
+[color]
+	ui = auto
+[push]
+	default = matching
