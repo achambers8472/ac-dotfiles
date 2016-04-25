@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "${AC_BASH_LIB_DIR}/standard_preamble"
+source "ac-bash-preamble" || exit 1
 
 target_dir=~/git/ac-essentials
 link_dir=~
