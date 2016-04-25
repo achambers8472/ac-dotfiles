@@ -4,7 +4,7 @@ unset BASH_ENV
 umask 022
 export TMOUT=0
 export AC_GIT_DIR="$HOME/git"
-export AC_CFG_DIR="${AC_GIT_DIR}/cfg"
+export AC_CFG_DIR="${AC_GIT_DIR}/ac-essentials"
 export AC_BASH_DIR="${AC_GIT_DIR}/ac-bash"
 export AC_PYTHON_DIR="${AC_GIT_DIR}/ac-python"
 export AC_PYTHON_OLD_DIR="${AC_GIT_DIR}/ac-python-old"
