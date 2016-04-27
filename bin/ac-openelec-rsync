@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ac-rsync --rsync-path=/storage/.kodi/addons/network.backup.rsync/bin/rsync "${@}"
