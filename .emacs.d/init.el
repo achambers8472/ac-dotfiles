@@ -5,7 +5,7 @@
 (tool-bar-mode nil)
 
 (setq custom-file "~/.emacs.d/ac-custom.el")
-(load custom-file)
+(if (file-exists-p custom-file) (load custom-file))
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying t
@@ -16,12 +16,13 @@
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 
 (add-to-list 'default-frame-alist '(font . "Inconsolata-14" ))
-(set-face-attribute 'default t :font "Inconsolata-14" )
+(if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-16" ))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+(scroll-bar-mode -1)
 (show-paren-mode t)
 (whitespace-mode 1)
 (setq-default indent-tabs-mode nil)

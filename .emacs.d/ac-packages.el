@@ -10,7 +10,7 @@
     evil
     key-chord
     evil-surround
-    magit
+    ;; magit
     auctex
     python-mode
     ;; anaconda-mode
@@ -28,6 +28,7 @@
     color-theme-solarized
     ;; solarized-theme
     bbdb
+    base16-theme
     )
   )
 
