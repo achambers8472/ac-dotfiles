@@ -27,6 +27,7 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'ervandew/supertab'
+Plugin 'chriskempson/base16-vim'
 call vundle#end()
 filetype indent plugin on
 syntax on
@@ -128,19 +129,24 @@ set viewoptions=folds,cursor
 "}}}
 
 " GUI options {{{
-set background=light
-set t_Co=16
-colorscheme solarized
-"colorscheme molokai
+set background=dark
+
+" set t_Co=16 " Only required for solarized
+" colorscheme solarized
+
+" colorscheme monokai
+
+" let base16colorspace=256
+colorscheme base16-default
+
 set guioptions=a
 set guifont=Inconsolata\ Medium\ 14
 set guiheadroom=0
 if has('gui_running')
-	colorscheme molokai
 	set encoding=utf-8
 	set lines=999 columns=999
 endif
-"highlight Search cterm=NONE ctermfg=white ctermbg=black
+" highlight Search cterm=NONE ctermfg=white ctermbg=black
 " }}}
 
 " Insert mode mappings {{{

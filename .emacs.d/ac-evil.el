@@ -8,6 +8,8 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
 
+(define-key evil-insert-state-map (kbd "<return>") 'evil-ret-and-indent)
+
 (defun insert-line-below ()
   (interactive)
   (save-excursion
