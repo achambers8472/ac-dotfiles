@@ -44,7 +44,7 @@ case "$(ac-hostname)" in
 	;;
     erwin)
 	JZANOTTI_HOME=/home/accounts/jzanotti
-	export PATH=~/install/qcdsfa-20140729+:${JZANOTTI_HOME}/bin:$PATH
+	export PATH="${HOME}/local/qcdsfa-20140729+:${JZANOTTI_HOME}/bin:$PATH"
 	export QA_LOGGER_PROP=${JZANOTTI_HOME}/etc/qa_log4cpp.properties
 	export LD_LIBRARY_PATH="${JZANOTTI_HOME}/lib:${JZANOTTI_HOME}/opt/install/guile-1.8.1/lib:$LD_LIBRARY_PATH"
 	export GLI_HOME=${JZANOTTI_HOME}/share

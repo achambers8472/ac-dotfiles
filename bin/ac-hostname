@@ -7,6 +7,10 @@ case "${HOSTNAME}" in
 	echo "eddie"
 	exit 0
 	;;
+	erwin*)
+	echo "erwin"
+	exit 0
+	;;
     isaac*)
 	echo "isaac"
 	exit 0
