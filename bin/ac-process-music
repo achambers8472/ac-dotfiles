@@ -5,12 +5,13 @@ source ac-bash-preamble || exit 1
 tmpdir="$(mktemp --directory --tmpdir=.)"
 for file in "$@"; do
     base="${file##*/}"
-    base="${base%%.*}"
+    base="${base%.*}"
     newfile="${tmpdir}/${base}.mp3"
-    sox \
-        --show-progress \
-		--multi-threaded \
-        "${file}" \
+    avconv -i "${file}" -f sox - | \
+	sox \
+	--show-progress \
+	--multi-threaded \
+        -t sox - \
         --replay-gain track \
         --compression -2.2 \
         "${newfile}" \
