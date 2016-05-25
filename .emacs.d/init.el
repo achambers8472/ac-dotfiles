@@ -15,7 +15,7 @@
       kept-old-version 5)
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 
-(add-to-list 'default-frame-alist '(font . "Inconsolata-14" ))
+(add-to-list 'default-frame-alist '(font . "Inconsolata-16" ))
 (if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-16" ))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
