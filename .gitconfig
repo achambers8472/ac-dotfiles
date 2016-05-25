@@ -2,7 +2,7 @@
 	name = Alexander Chambers
 	email = alexander.chambers@hotmail.com
 [core]
-	editor = emacs -nw
+	editor = vim
 	pager = less -r
 [color]
 	ui = auto
