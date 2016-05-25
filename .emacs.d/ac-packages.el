@@ -12,7 +12,7 @@
     evil-surround
     ;; magit
     auctex
-    python-mode
+    ;; python-mode
     ;; anaconda-mode
     haskell-mode
     lua-mode
