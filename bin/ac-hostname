@@ -3,39 +3,43 @@
 source ac-bash-preamble || exit 1
 
 case "${HOSTNAME}" in
-	eddie*)
-	echo "eddie"
-	exit 0
-	;;
-	erwin*)
-	echo "erwin"
-	exit 0
-	;;
+    eddie*)
+        echo "eddie"
+        exit 0
+        ;;
+    erwin*)
+        echo "erwin"
+        exit 0
+        ;;
     isaac*)
-	echo "isaac"
-	exit 0
-	;;
+        echo "isaac"
+        exit 0
+        ;;
     *phoenix*)
-	echo "phoenix"
-	exit 0
-	;;
+        echo "phoenix"
+        exit 0
+        ;;
 esac
 
 if [[ ! -z "${SLURM_CLUSTER_NAME:-}" ]] ; then
-	case "${SLURM_CLUSTER_NAME}" in
-		phoenix)
-			echo "phoenix"
-			exit 0
-			;;
-	esac
+    case "${SLURM_CLUSTER_NAME}" in
+        phoenix)
+            echo "phoenix"
+            exit 0
+            ;;
+    esac
 fi
 
 
 case "${USER}" in
     ajc566)
-	echo "raijin"
-	exit 0
-	;;
+        echo "raijin"
+        exit 0
+        ;;
+    hhpchamb)
+        echo "hlrn"
+        exit 0
+        ;;
 esac
 
 if [[ ! -z "${IVEC_CLUSTER:-}" ]] ; then
