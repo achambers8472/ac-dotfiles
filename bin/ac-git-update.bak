@@ -1,0 +1,98 @@
+#!/usr/bin/env python
+
+
+from __future__ import print_function
+
+
+import os
+import subprocess
+import sys
+
+
+def check_output(*args, **kwargs):
+    p = subprocess.Popen(*args, stdout=subprocess.PIPE, **kwargs)
+    out, err = p.communicate()
+    return out
+
+
+def fetch_all():
+    subprocess.check_call(["git", "fetch", "--all"])
+
+
+def current_branch():
+    return check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip()
+
+
+def untracked_files():
+    return check_output(["git", "ls-files", "--others", "--exclude-standard"])
+
+
+def modified_files():
+    return check_output(["git", "ls-files", "--modified", "--exclude-standard"])
+
+
+def relationship_with_origin_master():
+    status = check_output(["git", "status"])
+    for relationship in ["ahead", "behind", "diverged", "up-to-date"]:
+        if relationship in status:
+            return relationship
+    return "unknown"
+
+
+def fast_forward_to_origin_master():
+    subprocess.check_call(["git", "merge", "--ff-only", "origin/master"])
+
+
+def push_to_origin_master():
+    subprocess.check_call(["git", "push", "origin", "master"])
+
+
+def print_flush(*args):
+    print(*args)
+    sys.stdout.flush()
+
+repos = sys.argv[1:]
+root_dir = os.getcwd()
+
+untracked = []
+modified = []
+uncommitted = []
+diverged = []
+not_tracking = []
+
+for repo in repos:
+    print_flush("Updating", repo, "...")
+    try:
+        os.chdir(repo)
+        fetch_all()
+
+        if untracked_files():
+            untracked.append(repo)
+        # if uncommitted_files():
+        #     uncommitted.append(repo)
+        if modified_files():
+            modified.append(repo)
+
+        if current_branch() == "master":
+            reaction = {
+                "ahead": push_to_origin_master,
+                "behind": fast_forward_to_origin_master,
+                "diverged": (lambda: diverged.append(repo)),
+                "up-to-date": (lambda: None),
+                "unknown": (lambda: not_tracking.append(repo)),
+                }
+            reaction[relationship_with_origin_master()]()
+    finally:
+        os.chdir(root_dir)
+
+
+for explanation, repos in [
+        ("untracked files", untracked),
+        ("modified files", modified),
+        ("divergences from origin/master", diverged),
+        # ("uncommited files", uncommitted),
+        ("branch tracking not properly configured", not_tracking),
+]:
+    print_flush("Repositories with", explanation)
+    for repo in repos:
+        print_flush(repo)
