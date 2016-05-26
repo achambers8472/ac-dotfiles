@@ -8,18 +8,15 @@ modifed=()
 untracked=()
 
 for repo in "$@" ; do
-    echo "Checking ${repo}..."
+    echo -n "Checking ${repo}... "
     cd "${repo}"
-
-    # Update all remotes
     git fetch --all
-
     all_committed=true
 
     echo -n "Checking for modified files... "
     if [[ "$(git ls-files --modified --exclude-standard)" ]] ; then
         modified+=("${repo}")
-        all_commited=false
+        all_committed=false
         echo "True"
     else
         echo "False"
@@ -28,32 +25,35 @@ for repo in "$@" ; do
     echo -n "Checking for untracked files... "
     if [[ "$(git ls-files --others --exclude-standard)" ]] ; then
         untracked+=("${repo}")
-        all_commited=false
+        all_committed=false
         echo "True"
     else
         echo "False"
     fi
 
-    echo -n "Getting current branch... "
-    current_branch="$(git rev-parse --abbrev-ref HEAD)"
-    echo "$current_branch"
-
-    if [[ "$all_committed" == "true" && $current_branch == "master" ]] ; then
-        echo -n "Checking upstream status... "
-        local_hash="$(git rev-parse @{0})"
-        remote_hash="$(git rev-parse @{u})"
-        base_hash="$(git merge-base @{0} @{u})"
-        if [[ "$local_hash" == "$remote_hash" ]] ; then
-            echo "Up to date"
-        elif [[ "$local_hash" == "$base_hash" ]] ; then
-            echo "Ahead. Pulling changes..."
-            git pull
-        elif [[ "$remote_hash" == "$base_hash" ]] ; then
-            echo "Behing. Pushing changes..."
-            git push
-        else
-            echo "Diverged. Doing nothing..."
+    if [[ "$all_committed" == "true" ]] ; then
+        echo -n "All changes committed. Checking current branch... "
+        current_branch="$(git rev-parse --abbrev-ref HEAD)"
+        echo "$current_branch"
+        if [[ "$current_branch" == "master" ]] ; then
+            echo -n "On branch master. Checking upstream status... "
+            local_hash="$(git rev-parse @{0})"
+            remote_hash="$(git rev-parse @{u})"
+            base_hash="$(git merge-base @{0} @{u})"
+            if [[ "$local_hash" == "$remote_hash" ]] ; then
+                echo "Up to date"
+            elif [[ "$local_hash" == "$base_hash" ]] ; then
+                echo "Ahead. Pulling changes..."
+                git pull
+            elif [[ "$remote_hash" == "$base_hash" ]] ; then
+                echo "Behind. Pushing changes..."
+                git push
+            else
+                echo "Diverged. Doing nothing..."
+            fi
         fi
+    else
+        echo "Not all changes committed."
     fi
     cd "${start_dir}"
 done
