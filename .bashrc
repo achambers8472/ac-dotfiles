@@ -7,7 +7,8 @@ fi
 export BASH_ENV="${HOME}/.bash_env"
 source "${BASH_ENV}"
 
-if shopt -q login_shell ; then
+#  if shopt -q login_shell ; then
+if [[ $- == *i* ]] ; then
     if [[ -s "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh" ]] ; then
         source "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh"
     fi
@@ -23,7 +24,7 @@ shopt -s histappend
 
 alias ls='ls --color=auto'
 alias emacs='emacs -nw'
-alias tmux='TERM=screen-256color-bce tmux || \tmux'
+# alias tmux='TERM=screen-256color-bce tmux || tmux'
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 
