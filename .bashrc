@@ -73,7 +73,6 @@ case "$(ac-hostname)" in
         module switch PrgEnv-cray PrgEnv-gnu
         ;;
 	frost|kraft)
-		export TERM=xterm-256color
 		;;
 esac
 
