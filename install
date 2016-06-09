@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 source "lib/ac-bash-preamble" || exit 1
 
-target_dir=~/git/ac-essentials
-link_dir=~
+target_dir="${HOME}/git/ac-essentials"
+link_dir="${HOME}"
 
-targets=( ".bashrc" ".bash_env" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc")
-link_names=( ".bashrc" ".bash_env" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc")
+targets=( ".bashrc" ".bash_env" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc")
+link_names=( ".bashrc" ".bash_env" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc")
 
 for ((i=0;i<${#targets[@]};++i))
 do
