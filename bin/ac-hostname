@@ -19,6 +19,14 @@ case "${HOSTNAME}" in
         echo "phoenix"
         exit 0
         ;;
+	kraft)
+		echo "kraft"
+		exit 0
+		;;
+	frost)
+		echo "frost"
+		exit 0
+		;;
 esac
 
 if [[ ! -z "${SLURM_CLUSTER_NAME:-}" ]] ; then

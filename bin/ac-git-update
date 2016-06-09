@@ -1,98 +1,68 @@
-#!/usr/bin/env python
+#!/usr/bin/env bash
 
+source ac-bash-preamble || exit 1
 
-from __future__ import print_function
+start_dir="$PWD"
+ac-exit-push "cd \"${start_dir}\""
+modifed=()
+untracked=()
 
+for repo in "$@" ; do
+    echo -n "Checking ${repo}... "
+    cd "${repo}"
+    git fetch --all
+    all_committed=true
 
-import os
-import subprocess
-import sys
+    echo -n "Checking for modified files... "
+    if [[ "$(git ls-files --modified --exclude-standard)" ]] ; then
+        modified+=("${repo}")
+        all_committed=false
+        echo "True"
+    else
+        echo "False"
+    fi
 
+    echo -n "Checking for untracked files... "
+    if [[ "$(git ls-files --others --exclude-standard)" ]] ; then
+        untracked+=("${repo}")
+        all_committed=false
+        echo "True"
+    else
+        echo "False"
+    fi
 
-def check_output(*args, **kwargs):
-    p = subprocess.Popen(*args, stdout=subprocess.PIPE, **kwargs)
-    out, err = p.communicate()
-    return out
+    if [[ "$all_committed" == "true" ]] ; then
+        echo -n "All changes committed. Checking current branch... "
+        current_branch="$(git rev-parse --abbrev-ref HEAD)"
+        echo "$current_branch"
+        if [[ "$current_branch" == "master" ]] ; then
+            echo -n "On branch master. Checking upstream status... "
+            local_hash="$(git rev-parse @{0})"
+            remote_hash="$(git rev-parse @{u})"
+            base_hash="$(git merge-base @{0} @{u})"
+            if [[ "$local_hash" == "$remote_hash" ]] ; then
+                echo "Up to date"
+            elif [[ "$local_hash" == "$base_hash" ]] ; then
+                echo "Ahead. Pulling changes..."
+                git pull
+            elif [[ "$remote_hash" == "$base_hash" ]] ; then
+                echo "Behind. Pushing changes..."
+                git push
+            else
+                echo "Diverged. Doing nothing..."
+            fi
+        fi
+    else
+        echo "Not all changes committed."
+    fi
+    cd "${start_dir}"
+done
 
-
-def fetch_all():
-    subprocess.check_call(["git", "fetch", "--all"])
-
-
-def current_branch():
-    return check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip()
-
-
-def untracked_files():
-    return check_output(["git", "ls-files", "--others", "--exclude-standard"])
-
-
-def modified_files():
-    return check_output(["git", "ls-files", "--modified", "--exclude-standard"])
-
-
-def relationship_with_origin_master():
-    status = check_output(["git", "status"])
-    for relationship in ["ahead", "behind", "diverged", "up-to-date"]:
-        if relationship in status:
-            return relationship
-    return "unknown"
-
-
-def fast_forward_to_origin_master():
-    subprocess.check_call(["git", "merge", "--ff-only", "origin/master"])
-
-
-def push_to_origin_master():
-    subprocess.check_call(["git", "push", "origin", "master"])
-
-
-def print_flush(*args):
-    print(*args)
-    sys.stdout.flush()
-
-repos = sys.argv[1:]
-root_dir = os.getcwd()
-
-untracked = []
-modified = []
-uncommitted = []
-diverged = []
-not_tracking = []
-
-for repo in repos:
-    print_flush("Updating", repo, "...")
-    try:
-        os.chdir(repo)
-        fetch_all()
-
-        if untracked_files():
-            untracked.append(repo)
-        # if uncommitted_files():
-        #     uncommitted.append(repo)
-        if modified_files():
-            modified.append(repo)
-
-        if current_branch() == "master":
-            reaction = {
-                "ahead": push_to_origin_master,
-                "behind": fast_forward_to_origin_master,
-                "diverged": (lambda: diverged.append(repo)),
-                "up-to-date": (lambda: None),
-                "unknown": (lambda: not_tracking.append(repo)),
-                }
-            reaction[relationship_with_origin_master()]()
-    finally:
-        os.chdir(root_dir)
-
-
-for explanation, repos in [
-        ("untracked files", untracked),
-        ("modified files", modified),
-        ("divergences from origin/master", diverged),
-        # ("uncommited files", uncommitted),
-        ("branch tracking not properly configured", not_tracking),
-]:
-    print_flush("Repositories with", explanation)
-    for repo in repos:
-        print_flush(repo)
+echo "Repositories with modified files:"
+for repo in "${modified[@]}" ; do
+    echo $repo
+done
+echo "Repositories with untracked files:"
+for repo in "${untracked[@]}" ; do
+    echo $repo
+done
