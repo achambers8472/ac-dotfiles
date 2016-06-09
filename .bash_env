@@ -3,6 +3,10 @@ unset BASH_ENV
 
 umask 022
 export TMOUT=0
+
+export SCREENDIR="$HOME/.screen"
+mkdir --mode=700 --parents "$SCREENDIR"
+
 export AC_GIT_DIR="$HOME/git"
 export AC_ESSENTIALS_DIR="${AC_GIT_DIR}/ac-essentials"
 export AC_PYTHON_DIR="${AC_GIT_DIR}/ac-python"

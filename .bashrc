@@ -7,13 +7,6 @@ fi
 export BASH_ENV="${HOME}/.bash_env"
 source "${BASH_ENV}"
 
-#  if shopt -q login_shell ; then
-if [[ $- == *i* ]] ; then
-    if [[ -s "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh" ]] ; then
-        source "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh"
-    fi
-fi
-
 # Load dynamic bash environment
 export EDITOR=vim
 export PS1="\u@\h > "
@@ -24,7 +17,6 @@ shopt -s histappend
 
 alias ls='ls --color=auto'
 alias emacs='emacs -nw'
-# alias tmux='TERM=screen-256color-bce tmux || tmux'
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 
@@ -79,4 +71,13 @@ case "$(ac-hostname)" in
     hlrn)
         module switch PrgEnv-cray PrgEnv-gnu
         ;;
+	frost|kraft)
+		export TERM=xterm-256color
+		;;
 esac
+
+if [[ $- == *i* ]] ; then
+    if [[ -s "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh" ]] ; then
+        source "${AC_ESSENTIALS_DIR}/base16-shell/base16-default.dark.sh"
+    fi
+fi
