@@ -19,6 +19,7 @@ alias ls='ls --color=auto'
 alias emacs='emacs -nw'
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
+unset LS_COLORS
 
 case "$(ac-hostname)" in
     eddie)
