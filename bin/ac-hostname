@@ -44,6 +44,7 @@ esac
 
 if [[ ! -z "${IVEC_CLUSTER:-}" ]] ; then
     echo "${IVEC_CLUSTER}"
+    exit 0
 fi
 
 echo "unknown"
