@@ -21,7 +21,7 @@ alias emacs='emacs -nw'
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
 
-if [[ "${COLORTERM}" == gnome-terminal ]] ; then
+if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
 fi
 
