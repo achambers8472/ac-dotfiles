@@ -52,7 +52,7 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/anaconda/bin" \
+    "${HOME}/local/anaconda2/bin" \
 
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
