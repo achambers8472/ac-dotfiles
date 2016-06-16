@@ -70,8 +70,8 @@ case "$(ac-hostname)" in
         module switch gcc/4.8.2 gcc/4.9.2
         ;;
     magnus)
-        module switch PrgEnv-cray PrgEnv-gnu
-        module switch gcc/4.8.2 gcc/4.9.2
+	    module swap PrgEnv-cray PrgEnv-gnu
+        module swap gcc/4.8.2 gcc/4.9.2
         ;;
     hlrn)
         module switch PrgEnv-cray PrgEnv-gnu
