@@ -21,6 +21,10 @@ alias emacs='emacs -nw'
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
 
+if [[ "${COLORTERM}" == gnome-terminal ]] ; then
+	export TERM=xterm-256color
+fi
+
 case "$(ac-hostname)" in
     eddie)
         JHOME=/remote/accounts/jzanotti
@@ -72,8 +76,6 @@ case "$(ac-hostname)" in
     hlrn)
         module switch PrgEnv-cray PrgEnv-gnu
         ;;
-	frost|kraft)
-		;;
 esac
 
 if [[ $- == *i* ]] ; then
