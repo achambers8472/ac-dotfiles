@@ -17,7 +17,7 @@ mkdir --mode=700 --parents "$SCREENDIR"
 
 prefix="${HOME}/git/ac-essentials"
 ac_tex="${prefix}/ac-tex"
-ac_python="${HOME}/git/ac-python"
+ac_python="${prefix}/ac-python"
 ac_chroma_utils="${HOME}/git/ac-chroma-utils"
 
 ac-envvar-push-front() {
@@ -52,7 +52,7 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/anaconda2/bin" \
+    "${HOME}/local/"*"/bin" \
 
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
