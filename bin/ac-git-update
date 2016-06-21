@@ -4,8 +4,11 @@ source ac-bash-preamble || exit 1
 
 start_dir="$PWD"
 ac-exit-push "cd \"${start_dir}\""
-modifed=()
+modified=()
 untracked=()
+
+ac-exit-push 'if [[ ! -z ${modified:-} ]] ; then echo "Repositories with modified files:" ; for repo in "${modified[@]}" ; do echo $repo ; done ; fi'
+ac-exit-push 'if [[ ! -z ${untracked:-} ]] ; then echo "Repositories with untracked files:" ; for repo in "${untracked[@]}" ; do echo $repo ; done ; fi'
 
 for repo in "$@" ; do
     echo -n "Checking ${repo}... "
@@ -56,13 +59,4 @@ for repo in "$@" ; do
         echo "Not all changes committed."
     fi
     cd "${start_dir}"
-done
-
-echo "Repositories with modified files:"
-for repo in "${modified[@]}" ; do
-    echo $repo
-done
-echo "Repositories with untracked files:"
-for repo in "${untracked[@]}" ; do
-    echo $repo
 done
