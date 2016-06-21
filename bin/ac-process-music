@@ -7,7 +7,7 @@ for file in "$@"; do
     base="${file##*/}"
     base="${base%.*}"
     newfile="${tmpdir}/${base}.mp3"
-    avconv -i "${file}" -f sox - | \
+    avconv -i "${file}" -f sox -threads auto - | \
 	sox \
 	--show-progress \
 	--multi-threaded \
