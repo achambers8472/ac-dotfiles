@@ -10,8 +10,8 @@ ac-trap-function() {
         local com
 	local i
 	for ((i=${#ac_exit_commands[@]}-1;i>=0;i--)) ; do
-            echo "Running exit command:"
-	    echo "${ac_exit_commands[$i]}"
+            # echo "Running exit command:"
+	    # echo "${ac_exit_commands[$i]}"
 	    eval "${ac_exit_commands[$i]}"
         done
     fi
