@@ -76,9 +76,10 @@ if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
 fi
 
+base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
 if [[ $- == *i* ]] ; then
-    if [[ -s "${prefix}/base16-shell/base16-default.dark.sh" ]] ; then
-        source "${prefix}/base16-shell/base16-default.dark.sh"
+    if [[ -s "${base16_script}" ]] ; then
+        source "${base16_script}"
     fi
 fi
 
