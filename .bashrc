@@ -83,35 +83,6 @@ if [[ $- == *i* ]] ; then
     fi
 fi
 
-function ac-hostname {
-    case "${HOSTNAME}" in
-        eddie*) echo "eddie" ;;
-        erwin*) echo "erwin" ;;
-        isaac*) echo "isaac" ;;
-        *phoenix*) echo "phoenix" ;;
-        kraft) echo "kraft" ;;
-        frost) echo "frost" ;;
-        *)
-            if [[ ! -z "${IVEC_CLUSTER:-}" ]] ; then echo "${IVEC_CLUSTER}"
-            elif  [[ ! -z "${SLURM_CLUSTER_NAME:-}" ]] ; then
-                case "${SLURM_CLUSTER_NAME}" in
-                    phoenix) echo "phoenix" ;;
-                esac
-            else
-                case "${USER}" in
-                    ajc566)
-                        echo "raijin"
-                        ;;
-                    hhpchamb)
-                        echo "hlrn"
-                        ;;
-                    *)
-                        echo "unknown"
-                esac
-            fi
-    esac
-}
-
 function retry {
     while ! $@ ; do : ; done
 }
