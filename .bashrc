@@ -66,8 +66,8 @@ ac-envvar-push-front BSTINPUTS "." "${ac_tex}"
 
 alias ls='ls --color=auto'
 alias emacs='emacs -nw'
-alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
 alias watch='watch --difference=cumulative'
+alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
@@ -76,9 +76,10 @@ if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
 fi
 
+base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
 if [[ $- == *i* ]] ; then
-    if [[ -s "${prefix}/base16-shell/base16-default.dark.sh" ]] ; then
-        source "${prefix}/base16-shell/base16-default.dark.sh"
+    if [[ -s "${base16_script}" ]] ; then
+        source "${base16_script}"
     fi
 fi
 
@@ -109,6 +110,10 @@ function ac-hostname {
                 esac
             fi
     esac
+}
+
+function retry {
+    while ! $@ ; do : ; done
 }
 
 case "$(ac-hostname)" in
