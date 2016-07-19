@@ -1,5 +1,6 @@
 (when (or (string= system-name "kraft")
-	  (string= system-name "frost"))
+	  (string= system-name "frost")
+          (string= system-name "qai"))
   (load "~/.emacs.d/ac-packages.el"))
 
 (tool-bar-mode nil)
