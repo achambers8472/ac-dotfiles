@@ -20,12 +20,6 @@ ac_tex="${prefix}/ac-tex"
 ac_python="${prefix}/ac-python"
 ac_chroma_utils="${HOME}/git/ac-chroma-utils"
 
-case "${TERM}" in
-    screen*)
-        PROMPT_COMMAND='echo -ne "\033k\033\0134"'
-        ;;
-esac
-
 ac-envvar-push-front() {
     local varname="${1}"
     shift
