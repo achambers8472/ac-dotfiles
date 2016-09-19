@@ -34,7 +34,6 @@ mkdir --mode=700 --parents "$SCREENDIR"
 
 # PATH settings
 prefix="${HOME}/git/ac-essentials"
-# ac_tex="${prefix}/ac-tex"
 ac_python="${prefix}/ac-python"
 ac_chroma_utils="${HOME}/git/ac-chroma-utils"
 ac-envvar-push-front PATH \
@@ -49,9 +48,6 @@ ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
 ac-envvar-push-front PYTHONPATH "." "${ac_python}"
-# ac-envvar-push-front TEXINPUTS "." "${ac_tex}//"
-# ac-envvar-push-front BIBINPUTS "." "${ac_tex}"
-# ac-envvar-push-front BSTINPUTS "." "${ac_tex}"
 
 # Aliases
 alias ls='ls --color=auto'
