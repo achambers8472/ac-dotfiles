@@ -51,9 +51,12 @@ ac-envvar-push-front PYTHONPATH "." "${ac_python}"
 
 # Aliases
 alias ls='ls --color=auto'
-alias emacs='emacs -nw'
+alias emacs='emacs --no-window-system'
 alias watch='watch --difference=cumulative'
 alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
+alias du='du --summarize --human-readable'
+alias mv='mv --interactive'
+alias rm='rm --interactive'
 
 # Functions
 function retry {
