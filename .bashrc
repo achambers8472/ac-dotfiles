@@ -56,6 +56,7 @@ alias watch='watch --difference=cumulative'
 alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
 alias du='du --summarize --human-readable'
 alias mv='mv --interactive'
+alias df='df --human-readable'
 
 # Functions
 function retry {
