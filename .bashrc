@@ -43,7 +43,7 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/"*"/bin" \
+    "${HOME}/local/anaconda2/bin"
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
@@ -88,7 +88,7 @@ case "$(ac-hostname)" in
 
         export PATH="/home/eddie/achamber/bin:${PATH}"
         export PATH="/home/eddie/achamber/local/qcdsfa-20140729+:${PATH}"
-        export PATH="/home/eddie/achamber/local/anaconda/bin:${PATH}"
+        export PATH="/home/eddie/achamber/local/anaconda2/bin:${PATH}"
 
         export MANPATH="/home/eddie/achamber/man:${MANPATH}"
         ;;
