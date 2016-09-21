@@ -1,24 +1,6 @@
 # Load system defaults
-if [[ -f /etc/bashrc ]]; then
-    source /etc/bashrc || echo "Errors loading system bashrc"
-fi
 
-umask 022
-export TMOUT=0
-export EDITOR=vim
-export PS1="\u@\h > "
-export PS2="     > "
-export HISTCONTROL=erasedups
-export HISTSIZE=10000
-shopt -s histappend
-
-export SCREENDIR="$HOME/.screen"
-mkdir --mode=700 --parents "$SCREENDIR"
-
-prefix="${HOME}/git/ac-essentials"
-ac_tex="${prefix}/ac-tex"
-ac_python="${prefix}/ac-python"
-ac_chroma_utils="${HOME}/git/ac-chroma-utils"
+source /etc/bashrc > /dev/null 2>&1
 
 ac-envvar-push-front() {
     local varname="${1}"
@@ -33,18 +15,27 @@ ac-envvar-push-front() {
     done
 }
 
-# ac-envvar-push-back() {
-#     local varname="${1}"
-#     shift
-#     for newvalue in "$@" ; do
-# 	if [[ -z "${!varname:-}" ]] ; then
-# 	    export "${varname}"="${newvalue}:"
-# 	elif [[ ":${!varname}:" != *":${newvalue}:"* ]] ; then
-# 	    export "${varname}"="${!varname}:${newvalue}"
-# 	fi
-#     done
-# }
+# Terminal settings
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+shopt -s histappend
+export PS1="\u@\h > "
+export PS2="     > "
+export EDITOR=vim
+export TMOUT=0
+unset BASH_ENV
 
+# File settings
+umask 022
+
+# Screen settings
+export SCREENDIR="$HOME/.screen"
+mkdir --mode=700 --parents "$SCREENDIR"
+
+# PATH settings
+prefix="${HOME}/git/ac-essentials"
+ac_python="${prefix}/ac-python"
+ac_chroma_utils="${HOME}/git/ac-chroma-utils"
 ac-envvar-push-front PATH \
     "${prefix}/bin" \
     "${prefix}/lib" \
@@ -52,22 +43,25 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/"*"/bin" \
-
+    "${HOME}/local/anaconda2/bin"
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
-
 ac-envvar-push-front PYTHONPATH "." "${ac_python}"
 
-ac-envvar-push-front TEXINPUTS "." "${ac_tex}//"
-ac-envvar-push-front BIBINPUTS "." "${ac_tex}"
-ac-envvar-push-front BSTINPUTS "." "${ac_tex}"
-
+# Aliases
 alias ls='ls --color=auto'
-alias emacs='emacs -nw'
+alias emacs='emacs --no-window-system'
 alias watch='watch --difference=cumulative'
 alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
+alias du='du --summarize --human-readable'
+alias mv='mv --interactive'
+alias df='df --human-readable'
+
+# Functions
+function retry {
+    while ! $@ ; do : ; done
+}
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
@@ -83,39 +77,7 @@ if [[ $- == *i* ]] ; then
     fi
 fi
 
-function ac-hostname {
-    case "${HOSTNAME}" in
-        eddie*) echo "eddie" ;;
-        erwin*) echo "erwin" ;;
-        isaac*) echo "isaac" ;;
-        *phoenix*) echo "phoenix" ;;
-        kraft) echo "kraft" ;;
-        frost) echo "frost" ;;
-        *)
-            if [[ ! -z "${IVEC_CLUSTER:-}" ]] ; then echo "${IVEC_CLUSTER}"
-            elif  [[ ! -z "${SLURM_CLUSTER_NAME:-}" ]] ; then
-                case "${SLURM_CLUSTER_NAME}" in
-                    phoenix) echo "phoenix" ;;
-                esac
-            else
-                case "${USER}" in
-                    ajc566)
-                        echo "raijin"
-                        ;;
-                    hhpchamb)
-                        echo "hlrn"
-                        ;;
-                    *)
-                        echo "unknown"
-                esac
-            fi
-    esac
-}
-
-function retry {
-    while ! $@ ; do : ; done
-}
-
+# Host-specific settings
 case "$(ac-hostname)" in
     eddie)
         JHOME=/remote/accounts/jzanotti
@@ -129,7 +91,7 @@ case "$(ac-hostname)" in
 
         export PATH="/home/eddie/achamber/bin:${PATH}"
         export PATH="/home/eddie/achamber/local/qcdsfa-20140729+:${PATH}"
-        export PATH="/home/eddie/achamber/local/anaconda/bin:${PATH}"
+        export PATH="/home/eddie/achamber/local/anaconda2/bin:${PATH}"
 
         export MANPATH="/home/eddie/achamber/man:${MANPATH}"
         ;;
