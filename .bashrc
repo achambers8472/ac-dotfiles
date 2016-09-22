@@ -19,11 +19,20 @@ ac-envvar-push-front() {
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
+shopt -s checkwinsize
 export PS1="\u@\h > "
 export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
+fi
 
 # File settings
 umask 022
