@@ -120,6 +120,7 @@ case "$(ac-hostname)" in
         module load gcc/4.7.2-rdt
         ;;
     phoenix)
+		export WORK=/data/cssm/achambers
         module load OpenMPI/1.8.8-GNU-4.9.3-2.25
         module load CUDA/6.5.14
         module load ncurses/6.0-GNU-4.9.3-2.25
