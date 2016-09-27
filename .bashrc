@@ -19,11 +19,20 @@ ac-envvar-push-front() {
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
+shopt -s checkwinsize
 export PS1="\u@\h > "
 export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
+fi
 
 # File settings
 umask 022
@@ -43,7 +52,7 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/"*"/bin" \
+    "${HOME}/local/anaconda2/bin"
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
@@ -91,7 +100,7 @@ case "$(ac-hostname)" in
 
         export PATH="/home/eddie/achamber/bin:${PATH}"
         export PATH="/home/eddie/achamber/local/qcdsfa-20140729+:${PATH}"
-        export PATH="/home/eddie/achamber/local/anaconda/bin:${PATH}"
+        export PATH="/home/eddie/achamber/local/anaconda2/bin:${PATH}"
 
         export MANPATH="/home/eddie/achamber/man:${MANPATH}"
         ;;
@@ -112,6 +121,7 @@ case "$(ac-hostname)" in
         module load gcc/4.7.2-rdt
         ;;
     phoenix)
+		export WORK=/data/cssm/achambers
         module load OpenMPI/1.8.8-GNU-4.9.3-2.25
         module load CUDA/6.5.14
         module load ncurses/6.0-GNU-4.9.3-2.25
