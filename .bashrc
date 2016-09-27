@@ -96,6 +96,7 @@ case "$(ac-hostname)" in
         export MANPATH="/home/eddie/achamber/man:${MANPATH}"
         ;;
     erwin)
+		export WORK=/raid/achambers
         JZANOTTI_HOME=/home/accounts/jzanotti
         export PATH="${HOME}/local/qcdsfa-20140729+:${JZANOTTI_HOME}/bin:$PATH"
         export QA_LOGGER_PROP=${JZANOTTI_HOME}/etc/qa_log4cpp.properties
