@@ -14,6 +14,7 @@ screen -t localhost
 screen -t erwin ssh erwin
 screen -t phoenix ssh phoenix
 screen -t isaac ssh isaac
+screen -t eddie ssh eddie
 screen -t raijin ssh raijin
 screen -t magnus ssh magnus
 screen -t hlrn-hannover ssh hlrn-hannover
