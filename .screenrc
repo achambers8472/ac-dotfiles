@@ -11,6 +11,7 @@ bind l focus right
 bind h focus left
 
 screen -t localhost
+screen -t ipython ipython
 screen -t erwin ssh erwin
 screen -t phoenix ssh phoenix
 screen -t isaac ssh isaac
