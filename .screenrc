@@ -18,6 +18,7 @@ screen -t isaac ssh isaac
 screen -t eddie ssh eddie
 screen -t raijin ssh raijin
 screen -t magnus ssh magnus
+screen -t juqueen ssh juqueen
 screen -t hlrn-hannover ssh hlrn-hannover
 screen -t hlrn-berlin ssh hlrn-berlin
 select 0
