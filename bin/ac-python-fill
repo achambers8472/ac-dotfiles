@@ -7,7 +7,7 @@ import fileinput
 eval_delims = ('{{', '}}')
 exec_delims = ('{{{', '}}}')
 
-text = '\n'.join(line for line in fileinput.input())
+text = ''.join(line for line in fileinput.input())
 
 eval_regex = re.compile('(?s)' + '(.*?)'.join(eval_delims))
 exec_regex = re.compile('(?s)' + '(.*?)'.join(exec_delims) + '\n?')
@@ -26,5 +26,4 @@ while True:
         text = text.replace(target, str(eval(snippet)), 1)
     else:
         break
-
 print(text, end='')
