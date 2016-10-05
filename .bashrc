@@ -118,6 +118,7 @@ case "$(ac-hostname)" in
         module load Autotools/20150215-GNU-4.9.3-2.25
         ;;
     raijin)
+		export WORK=/short/e31/ajc566
         module unload intel-fc
         module unload intel-cc
         module load openmpi/1.6.5
