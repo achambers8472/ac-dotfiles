@@ -4,8 +4,10 @@ from __future__ import print_function
 import re
 import fileinput
 
-eval_delims = ('{{', '}}')
-exec_delims = ('{{{', '}}}')
+eval_delims = ('{{{', '}}}')
+exec_delims = ('{{', '}}')
+eval_len = len(eval_delims[0])
+exec_len = len(exec_delims[0])
 
 text = ''.join(line for line in fileinput.input())
 
@@ -15,7 +17,11 @@ exec_regex = re.compile('(?s)' + '(.*?)'.join(exec_delims) + '\n?')
 while True:
     exec_match = exec_regex.search(text)
     eval_match = eval_regex.search(text)
-    if exec_match and (not eval_match or exec_match.start() <= eval_match.start()):
+    if (exec_match
+        and (not eval_match
+             or (exec_match.start() < eval_match.start()
+                 or (exec_match.start() == eval_match.start()
+                     and exec_len > eval_len)))):
         target = exec_match.group(0)
         snippet = exec_match.group(1)
         exec(snippet)
