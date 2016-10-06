@@ -18,8 +18,10 @@ ac-envvar-push-front() {
 # Terminal settings
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
+export HISTFILESIZE=10000
 shopt -s histappend
 shopt -s checkwinsize
+shopt -s globstar
 export PS1="\u@\h > "
 export PS2="     > "
 export EDITOR=vim
@@ -60,6 +62,9 @@ ac-envvar-push-front PYTHONPATH "." "${ac_python}"
 
 # Aliases
 alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias emacs='emacs --no-window-system'
 alias watch='watch --difference=cumulative'
 alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
@@ -69,7 +74,12 @@ alias df='df --human-readable'
 
 # Functions
 function retry {
-    while ! $@ ; do : ; done
+    while ! eval "$@" ; do : ; done
+}
+function repeat { 
+    local count="$1" i;
+    shift;
+    for i in $(seq $count) ; do eval "$@" ; done
 }
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
@@ -79,12 +89,12 @@ if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
 fi
 
-base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
-if [[ $- == *i* ]] ; then
-    if [[ -s "${base16_script}" ]] ; then
-        source "${base16_script}"
-    fi
-fi
+# base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
+# if [[ $- == *i* ]] ; then
+#     if [[ -s "${base16_script}" ]] ; then
+#         source "${base16_script}"
+#     fi
+# fi
 
 # Host-specific settings
 case "$(ac-hostname)" in
