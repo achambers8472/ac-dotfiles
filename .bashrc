@@ -29,11 +29,9 @@ export TMOUT=0
 unset BASH_ENV
 
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-  fi
+    source /usr/share/bash-completion/bash_completion \
+        || source /etc/bash_completion \
+        || :
 fi
 
 # File settings
@@ -76,7 +74,7 @@ alias df='df --human-readable'
 function retry {
     while ! eval "$@" ; do : ; done
 }
-function repeat { 
+function repeat {
     local count="$1" i;
     shift;
     for i in $(seq $count) ; do eval "$@" ; done
@@ -88,13 +86,6 @@ unset LS_COLORS
 if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
 fi
-
-# base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
-# if [[ $- == *i* ]] ; then
-#     if [[ -s "${base16_script}" ]] ; then
-#         source "${base16_script}"
-#     fi
-# fi
 
 # Host-specific settings
 case "$(ac-hostname)" in
