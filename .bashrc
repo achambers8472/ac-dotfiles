@@ -1,6 +1,6 @@
 # Load system defaults
 
-source /etc/bashrc || echo "Error loading /etc/bashrc"
+source /etc/bashrc > /dev/null 2>&1
 
 ac-envvar-push-front() {
     local varname="${1}"
@@ -18,12 +18,21 @@ ac-envvar-push-front() {
 # Terminal settings
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
+export HISTFILESIZE=10000
 shopt -s histappend
+shopt -s checkwinsize
+shopt -s globstar
 export PS1="\u@\h > "
 export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+
+if ! shopt -oq posix; then
+    source /usr/share/bash-completion/bash_completion \
+        || source /etc/bash_completion \
+        || :
+fi
 
 # File settings
 umask 022
@@ -34,7 +43,6 @@ mkdir --mode=700 --parents "$SCREENDIR"
 
 # PATH settings
 prefix="${HOME}/git/ac-essentials"
-ac_tex="${prefix}/ac-tex"
 ac_python="${prefix}/ac-python"
 ac_chroma_utils="${HOME}/git/ac-chroma-utils"
 ac-envvar-push-front PATH \
@@ -44,24 +52,32 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/"*"/bin" \
+    "${HOME}/local/anaconda2/bin"
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
 ac-envvar-push-front PYTHONPATH "." "${ac_python}"
-ac-envvar-push-front TEXINPUTS "." "${ac_tex}//"
-ac-envvar-push-front BIBINPUTS "." "${ac_tex}"
-ac-envvar-push-front BSTINPUTS "." "${ac_tex}"
 
 # Aliases
 alias ls='ls --color=auto'
-alias emacs='emacs -nw'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias emacs='emacs --no-window-system'
 alias watch='watch --difference=cumulative'
 alias rsync='rsync --archive --verbose --progress --partial --human-readable --compress'
+alias du='du --summarize --human-readable'
+alias mv='mv --interactive'
+alias df='df --human-readable'
 
 # Functions
 function retry {
-    while ! $@ ; do : ; done
+    while ! eval "$@" ; do : ; done
+}
+function repeat {
+    local count="$1" i;
+    shift;
+    for i in $(seq $count) ; do eval "$@" ; done
 }
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
@@ -69,13 +85,6 @@ unset LS_COLORS
 
 if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
 	export TERM=xterm-256color
-fi
-
-base16_script="${prefix}/base16-shell/scripts/base16-default-dark.sh"
-if [[ $- == *i* ]] ; then
-    if [[ -s "${base16_script}" ]] ; then
-        source "${base16_script}"
-    fi
 fi
 
 # Host-specific settings
@@ -92,11 +101,12 @@ case "$(ac-hostname)" in
 
         export PATH="/home/eddie/achamber/bin:${PATH}"
         export PATH="/home/eddie/achamber/local/qcdsfa-20140729+:${PATH}"
-        export PATH="/home/eddie/achamber/local/anaconda/bin:${PATH}"
+        export PATH="/home/eddie/achamber/local/anaconda2/bin:${PATH}"
 
         export MANPATH="/home/eddie/achamber/man:${MANPATH}"
         ;;
     erwin)
+		export WORK=/raid/achambers
         JZANOTTI_HOME=/home/accounts/jzanotti
         export PATH="${HOME}/local/qcdsfa-20140729+:${JZANOTTI_HOME}/bin:$PATH"
         export QA_LOGGER_PROP=${JZANOTTI_HOME}/etc/qa_log4cpp.properties
@@ -112,6 +122,7 @@ case "$(ac-hostname)" in
         module load gcc/4.7.2-rdt
         ;;
     phoenix)
+		export WORK=/data/cssm/achambers
         module load OpenMPI/1.8.8-GNU-4.9.3-2.25
         module load CUDA/6.5.14
         module load ncurses/6.0-GNU-4.9.3-2.25
