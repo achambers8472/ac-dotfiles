@@ -31,7 +31,7 @@ unset BASH_ENV
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion \
         || source /etc/bash_completion \
-        || :
+        || : 2>/dev/null
 fi
 
 # File settings
