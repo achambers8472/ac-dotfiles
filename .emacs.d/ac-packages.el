@@ -24,8 +24,8 @@
     go-mode
     slime
     ;; monokai-theme
-    ;; zenburn-theme
-    color-theme-solarized
+    zenburn-theme
+    ;; color-theme-solarized
     ;; solarized-theme
     bbdb
     base16-theme
