@@ -28,7 +28,7 @@
     ;; color-theme-solarized
     ;; solarized-theme
     bbdb
-    base16-theme
+    ;; base16-theme
     )
   )
 

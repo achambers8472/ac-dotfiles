@@ -82,9 +82,9 @@ function repeat {
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
 
-if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
-	export TERM=xterm-256color
-fi
+#if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
+	#export TERM=xterm-256color
+#fi
 
 # Host-specific settings
 case "$(ac-hostname)" in
