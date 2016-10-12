@@ -1,6 +1,9 @@
-tmux new-session -s Work -n local -d
-tmux new-window -n IPython ipython
-tmux new-window -n analysis ssh phoenix
+tmux new-session -s Work -n Local -d
+tmux split-window -v ipython
+tmux new-window -n 'Jobs' ssh raijin
+tmux new-window -n 'Processing' ssh phoenix
 tmux split-window -v ssh erwin
-tmux select-window -t local
+tmux new-window -n 'Analysis'
+tmux select-window -t Local
+tmux select-pane -t 0
 tmux attach-session -t Work
