@@ -9,7 +9,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-abolish'
@@ -22,12 +22,12 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 "Plugin 'luochen1990/rainbow'
 "Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'tomasr/molokai'
-Plugin 'nanotech/jellybeans.vim'
+" Plugin 'tomasr/molokai'
+" Plugin 'nanotech/jellybeans.vim'
 Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-vividchalk'
+" Plugin 'tpope/vim-vividchalk'
 Plugin 'ervandew/supertab'
-Plugin 'chriskempson/base16-vim'
+" Plugin 'chriskempson/base16-vim'
 call vundle#end()
 filetype indent plugin on
 syntax on
@@ -130,19 +130,19 @@ set viewoptions=folds,cursor
 
 " GUI options {{{
 set background=dark
-
-" set t_Co=16 " Only required for solarized
-" colorscheme solarized
-
-" colorscheme monokai
-
-" let base16colorspace=256
-" colorscheme base16-default
-
 set guioptions=a
 set guifont=Inconsolata\ Medium\ 14
 set guiheadroom=0
 if has('gui_running')
+
+	" set t_Co=16 " Only required for solarized
+	" colorscheme solarized
+
+	" colorscheme monokai
+
+	" let base16colorspace=256
+	" colorscheme base16-default
+
 	set encoding=utf-8
 	set lines=999 columns=999
 endif
