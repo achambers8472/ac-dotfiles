@@ -36,3 +36,5 @@
   (highlight-phrase "randint"))
 
 (add-hook 'python-mode-hook 'highlight-randint)
+
+(setq tramp-use-ssh-controlmaster-options nil)
