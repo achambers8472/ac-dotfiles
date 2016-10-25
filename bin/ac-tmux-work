@@ -4,6 +4,9 @@ tmux new-session -s "Work" -n "Local" -d
 tmux split-window -h "ipython"
 tmux select-pane -t 0
 
+tmux new-window -n "Processes" "top"
+tmux split-window -h
+
 tmux new-window -n Raijin "ssh raijin"
 tmux split-window -h "ssh -t raijin 'watch --no-title qstat -u ajc566'"
 tmux select-pane -t 0
@@ -16,9 +19,6 @@ tmux new-window -n "Processing" "ssh phoenix"
 tmux split-window -v "ssh erwin"
 
 tmux new-window -n "Analysis"
-
-tmux new-window -n "Processes" "top"
-tmux split-window -h
 
 tmux select-window -t "Local"
 tmux attach-session -t "Work"
