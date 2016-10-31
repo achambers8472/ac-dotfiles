@@ -40,6 +40,8 @@ umask 022
 export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
 
+export HTOPRC="${HOME}/.htoprc"
+
 # PATH settings
 prefix="${HOME}/git/ac-essentials"
 ac_python="${prefix}/ac-python"
