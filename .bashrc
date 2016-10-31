@@ -16,7 +16,7 @@ ac-envvar-push-front() {
 }
 
 # Terminal settings
-export HISTCONTROL=erasedups
+export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
 shopt -s histappend
@@ -27,6 +27,7 @@ export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; ${PROMPT_COMMAND}"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
