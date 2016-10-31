@@ -8,11 +8,7 @@ ac-keep-alive () {
 export -f ac-keep-alive
 
 tmux new-session -s "Work" -n "Local" -d
-tmux split-window -h "ipython"
-tmux select-pane -t 0
-
-tmux new-window -n "Processes" "htop"
-#tmux split-window -v -p 50 "sudo nethogs"
+tmux split-window -v -p 25 "ipython"
 tmux select-pane -t 0
 
 tmux new-window -n Raijin "ac-keep-alive ssh raijin"
@@ -27,6 +23,9 @@ tmux new-window -n "Phoenix" "ac-keep-alive ssh phoenix"
 tmux select-pane -t 0
 
 tmux new-window -n "Erwin" "ac-keep-alive ssh erwin"
+tmux select-pane -t 0
+
+tmux new-window -n "Processes" "htop"
 tmux select-pane -t 0
 
 tmux select-window -t "Local"
