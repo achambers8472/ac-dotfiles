@@ -17,8 +17,8 @@ ac-envvar-push-front() {
 
 # Terminal settings
 export HISTCONTROL=erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=
+export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s globstar
