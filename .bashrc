@@ -27,7 +27,8 @@ export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; ${PROMPT_COMMAND}"
+# export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
+export PROMPT_COMMAND="history -w; history -c; history -r"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
