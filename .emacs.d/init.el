@@ -29,3 +29,12 @@
 (setq-default indent-tabs-mode nil)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-sensibly)
+
+(global-hi-lock-mode t)
+
+(defun highlight-randint ()
+  (highlight-phrase "randint"))
+
+(add-hook 'python-mode-hook 'highlight-randint)
+
+(setq tramp-use-ssh-controlmaster-options nil)

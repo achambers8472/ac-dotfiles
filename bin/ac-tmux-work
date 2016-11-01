@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+source ac-bash-preamble || exit 1
+
+ac-keep-alive () {
+	while true ; do eval "$@" ; sleep 5 ; done
+}
+export -f ac-keep-alive
+
+tmux new-session -s "Work" -n "Local" -d
+tmux split-window -v -p 25 "ipython"
+tmux select-pane -t 0
+
+tmux new-window -n Raijin "ac-keep-alive ssh raijin"
+tmux split-window -v -p 25 "ac-keep-alive ssh -t raijin 'watch --no-title qstat -u ajc566'"
+tmux select-pane -t 0
+
+tmux new-window -n "HLRN (Hannover)" "ac-keep-alive ssh hlrn-hannover"
+tmux split-window -h "ac-keep-alive ssh -t hlrn-hannover 'watch --no-title showq -u hhpchamb'"
+tmux select-pane -t 0
+
+tmux new-window -n "Phoenix" "ac-keep-alive ssh phoenix"
+tmux select-pane -t 0
+
+tmux new-window -n "Erwin" "ac-keep-alive ssh erwin"
+tmux select-pane -t 0
+
+tmux new-window -n "Processes" "htop"
+tmux select-pane -t 0
+
+tmux select-window -t "Local"
+tmux attach-session -t "Work"

@@ -16,9 +16,9 @@ ac-envvar-push-front() {
 }
 
 # Terminal settings
-export HISTCONTROL=erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=
+export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s globstar
@@ -27,6 +27,8 @@ export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+# export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
+export PROMPT_COMMAND="history -w; history -c; history -r"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
@@ -39,6 +41,8 @@ umask 022
 # Screen settings
 export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
+
+export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
 prefix="${HOME}/git/ac-essentials"
@@ -82,9 +86,9 @@ function repeat {
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
 
-if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
-	export TERM=xterm-256color
-fi
+#if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
+	#export TERM=xterm-256color
+#fi
 
 # Host-specific settings
 case "$(ac-hostname)" in
