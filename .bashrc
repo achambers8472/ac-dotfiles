@@ -29,7 +29,7 @@ unset BASH_ENV
 # Prompt settings
 export PS1='\[$(tput setaf 4)\][\T] \[$(tput sgr0)\]\u@\h:\w $(status=$? ; if [[ ${status} == 0 ]] ; then echo -e \[$(tput setaf 2)\]\(${status}\) ; else echo -e \[$(tput setaf 1)\]\(${status}\) ; fi)\[$(tput setaf 4)\]\n\[$(tput sgr0)\] \$ '
 export PS2="> "
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; ${PROMPT_COMMAND}"
+export PROMPT_COMMAND="history -w; history -c; history -r; ${PROMPT_COMMAND}"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
