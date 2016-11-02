@@ -22,11 +22,13 @@ export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s globstar
-export PS1="\u@\h > "
-export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+
+# Prompt settings
+export PS1='[\T \u@\h:\w $(status=$? ; if [[ ${status} == 0 ]] ; then echo -e $(tput setaf 2)\(${status}\) ; else echo -e $(tput setaf 1)\(${status}\) ; fi)$(tput sgr0)]\n\$ '
+export PS2="> "
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; ${PROMPT_COMMAND}"
 
 if ! shopt -oq posix; then
