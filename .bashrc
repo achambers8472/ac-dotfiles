@@ -74,6 +74,12 @@ alias rsync='rsync --archive --verbose --progress --partial --human-readable --c
 alias du='du --summarize --human-readable'
 alias mv='mv --interactive'
 alias df='df --human-readable'
+cd () {
+	pushd "$@" > /dev/null
+}
+bk () {
+	popd > /dev/null
+}
 
 # Functions
 function retry {
