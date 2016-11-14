@@ -32,7 +32,12 @@
 
 (global-hi-lock-mode t)
 
-(defun highlight-randint ()
-  (highlight-phrase "randint"))
+(defun python-highlights ()
+  (highlight-phrase "randint")
+  (highlight-phrase "numpy.std")
+  (highlight-phrase "numpy.mean")
+  )
 
-(add-hook 'python-mode-hook 'highlight-randint)
+(add-hook 'python-mode-hook 'python-highlights)
+
+(setq tramp-use-ssh-controlmaster-options nil)

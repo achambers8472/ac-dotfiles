@@ -16,19 +16,23 @@ ac-envvar-push-front() {
 }
 
 # Terminal settings
-export HISTCONTROL=erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=
+export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
 if [[ "${BASH_VERSION}" == 4* ]] ; then
   shopt -s globstar
 fi
-export PS1="\u@\h > "
-export PS2="     > "
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
+
+# Prompt settings
+export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
+# last=$(fc -ln -0 | sed -e s/^[[:space:]]*//)
+export PS2=" > "
+export PROMPT_COMMAND="history -w; history -c; history -r"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
@@ -41,6 +45,8 @@ umask 022
 # Screen settings
 export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
+
+export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
 prefix="${HOME}/git/ac-essentials"

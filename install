@@ -5,8 +5,8 @@ source "lib/ac-bash-preamble" || exit 1
 target_dir="${PWD}"
 link_dir="${HOME}"
 
-targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc")
-link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc")
+targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc")
+link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc")
 
 for ((i=0;i<${#targets[@]};++i))
 do
@@ -44,10 +44,6 @@ do
 			ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
 	fi
 done
-
-# Install submodule
-git submodule init
-git submodule update
 
 # Make sure permissions are correct
 chmod 700 .ssh

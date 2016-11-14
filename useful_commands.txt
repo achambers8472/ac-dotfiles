@@ -1,0 +1,5 @@
+# Resize pdf
+pdfjam --a4paper ${input_pdf} -o ${output_pdf}
+
+# Extract section of pdf
+pdftk ${input_pdf} cat ${start}-${end} output ${output_pdf}
