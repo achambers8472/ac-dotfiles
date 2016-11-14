@@ -7,7 +7,7 @@ tmux split-window -v -p 33 "htop"
 tmux select-pane -t 0
 
 tmux new-window -n Raijin "while true ; do ssh raijin ; sleep 1 ; done"
-tmux split-window -v -p 25 "while true ; do ssh -t raijin \"watch --no-title 'qstat -u ajc566 | tail -n +3' \" ; sleep 1 ; done"
+tmux split-window -h "while true ; do ssh -t raijin \"watch --no-title 'qstat -u ajc566 | tail -n +3' \" ; sleep 1 ; done"
 tmux select-pane -t 0
 
 tmux new-window -n "HLRN (Hannover)" "while true ; do ssh hlrn-hannover ; sleep 1 ; done"
