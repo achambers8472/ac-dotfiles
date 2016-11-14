@@ -21,7 +21,9 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 shopt -s histappend
 shopt -s checkwinsize
-shopt -s globstar
+if [[ "${BASH_VERSION}" == 4* ]] ; then
+  shopt -s globstar
+fi
 export PS1="\u@\h > "
 export PS2="     > "
 export EDITOR=vim
