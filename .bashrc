@@ -21,7 +21,9 @@ export HISTSIZE=
 export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
-shopt -s globstar
+if [[ "${BASH_VERSION}" == 4* ]] ; then
+  shopt -s globstar
+fi
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
