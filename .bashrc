@@ -21,13 +21,17 @@ export HISTSIZE=
 export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
-shopt -s globstar
-export PS1="\u@\h > "
-export PS2="     > "
+if [[ "${BASH_VERSION}" == 4* ]] ; then
+  shopt -s globstar
+fi
 export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
-# export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
+
+# Prompt settings
+export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
+# last=$(fc -ln -0 | sed -e s/^[[:space:]]*//)
+export PS2=" > "
 export PROMPT_COMMAND="history -w; history -c; history -r"
 
 if ! shopt -oq posix; then

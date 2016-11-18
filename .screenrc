@@ -9,16 +9,3 @@ bind j focus down
 bind k focus up
 bind l focus right
 bind h focus left
-
-screen -t localhost
-screen -t ipython ipython
-screen -t erwin ssh erwin
-screen -t phoenix ssh phoenix
-screen -t isaac ssh isaac
-screen -t eddie ssh eddie
-screen -t raijin ssh raijin
-screen -t magnus ssh magnus
-screen -t juqueen ssh juqueen
-screen -t hlrn-hannover ssh hlrn-hannover
-screen -t hlrn-berlin ssh hlrn-berlin
-select 0
