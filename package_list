@@ -6,4 +6,6 @@ emacs
 pdftk
 gimp
 tmux
+sox
+libsox-fmt-mp3
 htop
