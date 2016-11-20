@@ -29,6 +29,7 @@
     ;; solarized-theme
     bbdb
     ;; base16-theme
+    json-mode
     )
   )
 
