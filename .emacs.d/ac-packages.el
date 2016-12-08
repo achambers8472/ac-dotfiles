@@ -10,7 +10,7 @@
     evil
     key-chord
     evil-surround
-    ;; magit
+    magit
     auctex
     ;; python-mode
     ;; anaconda-mode
