@@ -11,6 +11,7 @@
     key-chord
     evil-surround
     magit
+    reftex
     auctex
     ;; python-mode
     ;; anaconda-mode
