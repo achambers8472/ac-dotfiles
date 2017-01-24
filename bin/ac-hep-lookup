@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+import urllib2
+import re
+import sys
+
+for key in sys.argv[1:]:
+	response = urllib2.urlopen(key.replace(":", "%3a").join(("http://inspirehep.net/search?ln=en&p=", "&of=hb&action_search=Search&sf=earliestdate&so=d")))
+	html = response.read()
+
+	bibtex_url = re.search('http://inspirehep.net/record/\d+/export/hx', html).group(0)
+
+	response = urllib2.urlopen(bibtex_url)
+	html_lines = response.readlines()
+
+	def bibtex_from_html(html_lines):
+		bibtex = []
+		iterator = iter(html_lines)
+		for line in iterator:
+			if line.startswith(r"@article"):
+				bibtex.append(line)
+				for line in iterator:
+					bibtex.append(line)
+					if line.startswith(r"}"):
+						return ''.join(bibtex)
+
+	print bibtex_from_html(html_lines)
