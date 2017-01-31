@@ -5,8 +5,8 @@ source "lib/ac-bash-preamble" || exit 1
 target_dir="${PWD}"
 link_dir="${HOME}"
 
-targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf/")
-link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf")
+targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf/" ".aspell.en.prepl" ".aspell.en.pws")
+link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf" ".aspell.en.prepl" ".aspell.en.pws")
 
 for ((i=0;i<${#targets[@]};++i))
 do

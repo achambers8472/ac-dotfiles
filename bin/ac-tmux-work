@@ -4,6 +4,9 @@ source ac-bash-preamble || exit 1
 
 tmux new-session -s "Work" -n "Local" -d
 
+# tmux new-window -n "emacs" "while true ; do emacs -nw ; sleep 30 ; done"
+# tmux select-pane -t 0
+
 tmux new-window -n "htop" "while true ; do htop ; sleep 30 ; done"
 tmux select-pane -t 0
 
