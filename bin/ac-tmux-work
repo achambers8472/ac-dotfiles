@@ -22,8 +22,8 @@ tmux split-window -v "while true ; do ssh -t raijin 'top -M -u ajc566' ; sleep 3
 tmux select-pane -t 0
 
 tmux new-window -n "HLRN (Hannover)" "while true ; do ssh hlrn-hannover ; sleep 30 ; done"
-tmux split-window -h "while true ; do ssh -t hlrn-hannover \"watch --no-title 'showq -u hhpchamb | tail -n +2' \" ; sleep 30 ; done"
-tmux split-window -v "while true ; do ssh -t hlrn-hannover 'top -u hhpchamb' ; sleep 30 ; done"
+# tmux split-window -h "while true ; do ssh -t hlrn-hannover \"watch --no-title --interval 120 'showq -u hhpchamb | tail -n +2' \" ; sleep 30 ; done"
+tmux split-window -h "while true ; do ssh -t hlrn-hannover 'top -u hhpchamb' ; sleep 30 ; done"
 tmux select-pane -t 0
 
 tmux new-window -n "Phoenix" "while true ; do ssh phoenix ; sleep 30 ; done"
