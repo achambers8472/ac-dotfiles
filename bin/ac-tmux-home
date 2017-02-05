@@ -2,17 +2,19 @@
 
 source ac-bash-preamble || exit 1
 
-tmux new-session -s "Home" -n "Bash" -d
+tmux new-session -s "Home" -n "Local" -d
 tmux select-pane -t 0
 
-tmux new-window -n "htop" "while true ; do htop ; sleep 30 ; done"
-tmux select-pane -t 0
+ac-tmux-common
 
-tmux new-window -n "ncdu" "while true ; do ncdu -x '${HOME}' ; sleep 30 ; done"
-tmux select-pane -t 0
+# tmux new-window -n "htop" "while true ; do htop ; sleep 30 ; done"
+# tmux select-pane -t 0
 
-tmux new-window -n "mc" "while true ; do mc ; sleep 30 ; done"
-tmux select-pane -t 0
+# tmux new-window -n "ncdu" "while true ; do ncdu -x '${HOME}' ; sleep 30 ; done"
+# tmux select-pane -t 0
 
-tmux select-window -t "Bash"
+# tmux new-window -n "mc" "while true ; do mc ; sleep 30 ; done"
+# tmux select-pane -t 0
+
+tmux select-window -t "Local"
 tmux attach-session -t "Home"
