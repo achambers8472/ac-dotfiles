@@ -6,57 +6,68 @@ start_dir="$PWD"
 ac-exit-push "cd \"${start_dir}\""
 modified=()
 untracked=()
+not=()
 
-ac-exit-push 'if [[ ! -z ${modified:-} ]] ; then echo "Repositories with modified files:" ; for repo in "${modified[@]}" ; do echo $repo ; done ; fi'
-ac-exit-push 'if [[ ! -z ${untracked:-} ]] ; then echo "Repositories with untracked files:" ; for repo in "${untracked[@]}" ; do echo $repo ; done ; fi'
+ac-exit-push 'if [[ ! -z ${modified:-} ]] ; then echo "Modified files:" ; for repo in "${modified[@]}" ; do echo $repo ; done ; fi'
+ac-exit-push 'if [[ ! -z ${untracked:-} ]] ; then echo "Untracked files:" ; for repo in "${untracked[@]}" ; do echo $repo ; done ; fi'
+ac-exit-push 'if [[ ! -z ${not:-} ]] ; then echo "Not git repositories:" ; for repo in "${not[@]}" ; do echo $repo ; done ; fi'
 
 for repo in "$@" ; do
-    echo -n "Checking ${repo}... "
+    echo "Checking ${repo}... "
     cd "${repo}"
-    git fetch --all
-    all_committed=true
 
-    echo -n "Checking for modified files... "
-    if [[ "$(git ls-files --modified --exclude-standard)" ]] ; then
-        modified+=("${repo}")
-        all_committed=false
-        echo "True"
-    else
+    echo -n "Checking if a git repository... "
+    if [[ ! -d ".git" ]] ; then
+        not+=("${repo}")
         echo "False"
-    fi
-
-    echo -n "Checking for untracked files... "
-    if [[ "$(git ls-files --others --exclude-standard)" ]] ; then
-        untracked+=("${repo}")
-        all_committed=false
-        echo "True"
     else
-        echo "False"
-    fi
+        echo "True"
 
-    if [[ "$all_committed" == "true" ]] ; then
-        echo -n "All changes committed. Checking current branch... "
-        current_branch="$(git rev-parse --abbrev-ref HEAD)"
-        echo "$current_branch"
-        if [[ "$current_branch" == "master" ]] ; then
-            echo -n "On branch master. Checking upstream status... "
-            local_hash="$(git rev-parse @{0})"
-            remote_hash="$(git rev-parse @{u})"
-            base_hash="$(git merge-base @{0} @{u})"
-            if [[ "$local_hash" == "$remote_hash" ]] ; then
-                echo "Up to date"
-            elif [[ "$local_hash" == "$base_hash" ]] ; then
-                echo "Ahead. Pulling changes..."
-                git pull
-            elif [[ "$remote_hash" == "$base_hash" ]] ; then
-                echo "Behind. Pushing changes..."
-                git push
-            else
-                echo "Diverged. Doing nothing..."
-            fi
+        git fetch --all
+        all_committed=true
+
+        echo -n "Checking for modified files... "
+        if [[ "$(git ls-files --modified --exclude-standard)" ]] ; then
+            modified+=("${repo}")
+            all_committed=false
+            echo "True"
+        else
+            echo "False"
         fi
-    else
-        echo "Not all changes committed."
+
+        echo -n "Checking for untracked files... "
+        if [[ "$(git ls-files --others --exclude-standard)" ]] ; then
+            untracked+=("${repo}")
+            all_committed=false
+            echo "True"
+        else
+            echo "False"
+        fi
+
+        if [[ "$all_committed" == "true" ]] ; then
+            echo -n "All changes committed. Checking current branch... "
+            current_branch="$(git rev-parse --abbrev-ref HEAD)"
+            echo "$current_branch"
+            if [[ "$current_branch" == "master" ]] ; then
+                echo -n "On branch master. Checking upstream status... "
+                local_hash="$(git rev-parse @{0})"
+                remote_hash="$(git rev-parse @{u})"
+                base_hash="$(git merge-base @{0} @{u})"
+                if [[ "$local_hash" == "$remote_hash" ]] ; then
+                    echo "Up to date"
+                elif [[ "$local_hash" == "$base_hash" ]] ; then
+                    echo "Ahead. Pulling changes..."
+                    git pull
+                elif [[ "$remote_hash" == "$base_hash" ]] ; then
+                    echo "Behind. Pushing changes..."
+                    git push
+                else
+                    echo "Diverged. Doing nothing..."
+                fi
+            fi
+        else
+            echo "Not all changes committed."
+        fi
     fi
     cd "${start_dir}"
 done
