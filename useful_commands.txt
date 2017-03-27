@@ -3,3 +3,5 @@ pdfjam --a4paper ${input_pdf} -o ${output_pdf}
 
 # Extract section of pdf
 pdftk ${input_pdf} cat ${start}-${end} output ${output_pdf}
+
+pdftk DungeonWorld_color_spreads.pdf cat 197-198 19-20 199-200 165-166 output extra.pdf && pdfnup extra.pdf --no-landscape --nup 1x2 --outfile extra-nup.pdf && pdftk EX=extra-nup.pdf PS=Dungeon_World_Play_Sheets.pdf cat PS30 PS4-5 EX PS6-29 output classes.pdf && pdfjam --a4paper classes.pdf -o a4_classes.pdf
