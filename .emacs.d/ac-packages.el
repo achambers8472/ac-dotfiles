@@ -39,12 +39,7 @@
                    indent-guide
                    go-mode
                    slime
-                   ;; monokai-theme
-                   ;; zenburn-theme
-                   ;; color-theme-solarized
-                   solarized-theme
                    bbdb
-                   ;; base16-theme
                    json-mode
                    ))
     (message (concat "Setting up package " (symbol-name package) "..."))

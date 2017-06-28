@@ -10,3 +10,6 @@
 [submodule "ac-bib"]
 	path = ac-bib
 	url = git@bitbucket.org:achambers8472/ac-bib.git
+[submodule "submodules/solarized"]
+	path = submodules/solarized
+	url = git://github.com/altercation/solarized.git

@@ -3,6 +3,9 @@
           (string= system-name "qai"))
   (load "~/.emacs.d/ac-packages.el"))
 
+(load "~/git/ac-essentials/submodules/solarized/emacs-colors-solarized/color-theme-solarized.el")
+(color-theme-solarized-light)
+
 (tool-bar-mode nil)
 
 (setq custom-file "~/.emacs.d/ac-custom.el")
