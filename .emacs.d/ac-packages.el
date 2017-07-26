@@ -15,6 +15,7 @@
 )
 
 (dolist (package '(
+                   color-theme
                    fill-column-indicator
                    ido
                    ido-vertical-mode

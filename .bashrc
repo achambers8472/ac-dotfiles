@@ -60,11 +60,14 @@ ac-envvar-push-front PATH \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
     "${HOME}/local/anaconda2/bin" \
-    "${HOME}/local/IGV_2.3.94" \
-    "${HOME}/local/samtools-1.5/bin" \
-    "${HOME}/local/htslib-1.5" \
-    "${HOME}/local/FastQC" \
-    "${HOME}/local/freebayes/bin"
+    "${HOME}/.opt/IGV_2.3.94" \
+    "${HOME}/.opt/FastQC" \
+    "${HOME}/.opt/picard_2.9.4" \
+	"${HOME}/.opt/GenomeAnalysisTK-3.7" \
+	"${HOME}/.opt/hisat2-2.0.4"
+    # "${HOME}/local/samtools-1.5/bin" \
+    # "${HOME}/local/htslib-1.5" \
+    # "${HOME}/local/freebayes/bin"
 ac-envvar-push-front MANPATH \
     "${HOME}/man" \
     "${HOME}/share/man"
