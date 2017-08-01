@@ -1,4 +1,4 @@
-$pdf_previewer = "start evince";
+$pdf_previewer = "start xreader";
 $pdf_update_method = 0;
 $pdflatex = "pdflatex --shell-escape  %O  %S";
 $cleanup_includes_cusdep_generated = 1;

@@ -2,7 +2,7 @@
 
 ;;; Code:
 
-(setq org-directory "~/git/ac-org")
+(setq org-directory "~/.emacs.d/org")
 (setq org-default-notes-file (concat org-directory "/refile.org"))
 (setq org-agenda-diary-file (concat org-directory "/diary.org"))
 (setq org-agenda-files (list org-directory))

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 source "lib/ac-bash-preamble" || exit 1
 
-#target_dir="${HOME}/git/ac-essentials"
 target_dir="${PWD}"
 link_dir="${HOME}"
 

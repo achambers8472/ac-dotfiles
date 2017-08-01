@@ -49,9 +49,9 @@ mkdir --mode=700 --parents "$SCREENDIR"
 export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
-prefix="${HOME}/git/ac-essentials"
+prefix="${HOME}/.opt/ac-essentials"
 ac_python="${prefix}/ac-python"
-ac_chroma_utils="${HOME}/git/ac-chroma-utils"
+ac_chroma_utils="${HOME}/.opt/ac-chroma-utils"
 ac-envvar-push-front PATH \
     "${prefix}/bin" \
     "${prefix}/lib" \
@@ -59,12 +59,13 @@ ac-envvar-push-front PATH \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
-    "${HOME}/local/anaconda2/bin" \
+    "${HOME}/.opt/anaconda2/bin" \
     "${HOME}/.opt/IGV_2.3.94" \
     "${HOME}/.opt/FastQC" \
     "${HOME}/.opt/picard_2.9.4" \
 	"${HOME}/.opt/GenomeAnalysisTK-3.7" \
-	"${HOME}/.opt/hisat2-2.0.4"
+	"${HOME}/.opt/hisat2-2.0.4" \
+	"${HOME}/.opt/fred"
     # "${HOME}/local/samtools-1.5/bin" \
     # "${HOME}/local/htslib-1.5" \
     # "${HOME}/local/freebayes/bin"
