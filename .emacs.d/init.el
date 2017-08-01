@@ -18,6 +18,7 @@
       kept-new-versions 20
       kept-old-version 5)
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
+(setq column-number-mode t)
 
 (add-to-list 'default-frame-alist '(font . "Inconsolata-18" ))
 (if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-18" ))
