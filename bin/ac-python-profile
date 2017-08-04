@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-source ac-bash-preamble || exit 1
+set -o errexit
+set -o pipefail
+set -o nounset
 
-tmp_output="$(mktemp tmp.XXXXXXXXXX)"
+tmp_output="$(mktemp XXXXXXXXXXXXXXXX.tmp)"
+trap "rm '${tmp_output}'" EXIT
 python -m cProfile -o "${tmp_output}" $@
 runsnake "${tmp_output}"
-rm "${tmp_output}"
