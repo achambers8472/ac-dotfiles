@@ -7,12 +7,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
-" Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
-"Plugin 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex'
 Plug 'tpope/vim-surround'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -21,6 +21,13 @@ Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 call plug#end()
 " }}}
+
+
+" vim-colors-solarized {{{
+set background=light
+colorscheme solarized
+" }}}
+
 
 " Easymotion setup {{{
 let g:EasyMotion_do_mapping = 0
@@ -118,20 +125,10 @@ set viewoptions=folds,cursor
 "}}}
 
 " GUI options {{{
-set background=dark
-set guioptions=a
-set guifont=Inconsolata\ Medium\ 14
-set guiheadroom=0
 if has('gui_running')
-
-	" set t_Co=16 " Only required for solarized
-	" colorscheme solarized
-
-	" colorscheme monokai
-
-	" let base16colorspace=256
-	" colorscheme base16-default
-
+	set guioptions=a
+	set guifont=Inconsolata\ Medium\ 14
+	set guiheadroom=0
 	set encoding=utf-8
 	set lines=999 columns=999
 endif
