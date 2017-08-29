@@ -20,8 +20,8 @@
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 (setq column-number-mode t)
 
-(add-to-list 'default-frame-alist '(font . "Inconsolata-18" ))
-(if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-18" ))
+(add-to-list 'default-frame-alist '(font . "Inconsolata-16" ))
+(if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-16" ))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
