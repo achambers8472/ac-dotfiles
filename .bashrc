@@ -51,15 +51,14 @@ export HTOPRC="${HOME}/.htoprc"
 # PATH settings
 prefix="${HOME}/.opt/ac-essentials"
 ac_python="${prefix}/ac-python"
-ac_chroma_utils="${HOME}/.opt/ac-chroma-utils"
 ac-envvar-push-front PATH \
     "${prefix}/bin" \
     "${prefix}/lib" \
-    "${ac_chroma_utils}" \
     "${HOME}/bin" \
     "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
     "${HOME}/.opt/anaconda2/bin" \
+    "${HOME}/.opt/ac-chroma-utils" \
     "${HOME}/.opt/IGV_2.3.94" \
     "${HOME}/.opt/FastQC" \
     "${HOME}/.opt/picard_2.9.4" \

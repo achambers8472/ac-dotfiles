@@ -14,7 +14,8 @@
 
 .vim/view
 .vim/.netrwhist
-.vim/bundle/*
+.vim/autoload/plug.vim
+.vim/plugged/*
 
 .emacs.d/elpa
 .emacs.d/ido.last

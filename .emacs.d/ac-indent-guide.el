@@ -1,1 +1,0 @@
-(indent-guide-global-mode)
