@@ -5,20 +5,24 @@ call plug#begin()
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
-Plug 'vim-latex/vim-latex'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'vim-latex/vim-latex'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 " }}}
 
@@ -27,31 +31,32 @@ call plug#end()
 set background=light
 colorscheme solarized
 " }}}
-
-
-" Easymotion setup {{{
+" vim-gitgutter {{{
+set updatetime=250
+if exists('&signcolumn')  " Vim 7.4.2201
+	set signcolumn=yes
+else
+	let g:gitgutter_sign_column_always = 1
+endif
+" }}}
+" vim-easymotion setup {{{
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 " }}}
-" NERDTree setup {{{
-" }}}
-" airline setup {{{
+" vim-airline {{{
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
 " }}}
-" vim-latex setup {{{
+" vim-latex {{{
 let g:tex_flavor='latex'
 let g:Tex_BIBINPUTS=expand('~/git/tex')
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 let g:Imap_UsePlaceHolders=0
 " }}}
-" NERDCommenter setup {{{
+" nerdcommenter setup {{{
 let g:NERDCreateDefaultMappings = 0
-" }}}
-" luochen/rainbow setup {{{
-let g:rainbow_active = 1
 " }}}
 
 " Leader keys {{{
@@ -60,51 +65,15 @@ let maplocalleader = "\\"
 " }}}
 
 " Global options {{{
-" Show characters to indicate whitespace
-set list
-" Keep indentation from previous line
-set autoindent
-set backspace=indent,eol,start
-" complete changes where vim scans for auto-completion
-set complete-=i
-" Inserted tabs are ACTUALLY tabs
-set noexpandtab
-" Existings tabs are shown to be 4 columns wide
-set tabstop=4
-" Tabs I put in are made of tabs
-set softtabstop=4
-" Using > and < to shift indent always rounds to a multiple of 4
-set shiftround
-set shiftwidth=4
-" smarttab just changes how clever vim is about inserting tabs
-set smarttab
-" Wait 100ms for next character in sequence (when ambiguous)
-set ttimeout
-set ttimeoutlen=100
-" Start showing search results immediately
-set incsearch
-" Show statusbar all the time!
-set laststatus=2
-" Show cursor position
-set ruler
+"set noexpandtab   " Inserted tabs are ACTUALLY tabs
+"set tabstop=4     " Existings tabs are shown to be 4 columns wide
+"set softtabstop=4 " Tabs I put in are made of tabs
+"set shiftround    " Using > and < to shift indent always rounds to a multiple of 4
+"set shiftwidth=4
+
 set showcmd
-" Enhance command completion
-set wildmenu
 set wildmode=list:longest
-" Show at least 1 line above and below cursor
-set scrolloff=10
-" Same as above for columns
-set sidescrolloff=5
-set display+=lastline
-" Changes how whitespace characters are shown when 'list' active
-set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-set nolist
-" If file is changed outside vim, read it again and show changes
-set autoread
-" Increase command history size to 1000
-set history=1000
-" Increase maximum number of tabs
-set tabpagemax=50
+set scrolloff=10 " Show at least 10 lines above and below cursor
 set foldlevelstart=0
 " Search Options
 set hlsearch
@@ -127,9 +96,8 @@ set viewoptions=folds,cursor
 " GUI options {{{
 if has('gui_running')
 	set guioptions=a
-	set guifont=Inconsolata\ Medium\ 14
+	set guifont=Inconsolata\ Medium\ 16
 	set guiheadroom=0
-	set encoding=utf-8
 	set lines=999 columns=999
 endif
 " highlight Search cterm=NONE ctermfg=white ctermbg=black
