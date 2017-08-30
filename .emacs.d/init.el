@@ -147,3 +147,5 @@
 (add-hook 'python-mode-hook 'python-highlights)
 
 (setq tramp-use-ssh-controlmaster-options nil)
+
+(global-linum-mode t) ;; Line numbers
