@@ -86,9 +86,9 @@ set numberwidth=4
 set linebreak
 " Display options
 if exists('&colorcolumn')
-	set colorcolumn=72
+	set colorcolumn=81
 else
-	2mat ErrorMsg '\%72v.'
+	2mat ErrorMsg '\%81v.'
 endif
 set viewoptions=folds,cursor
 "}}}
@@ -96,7 +96,7 @@ set viewoptions=folds,cursor
 " GUI options {{{
 if has('gui_running')
 	set guioptions=a
-	set guifont=Inconsolata\ Medium\ 16
+	set guifont=Inconsolata\ Medium\ 14
 	set guiheadroom=0
 	set lines=999 columns=999
 endif
