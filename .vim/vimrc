@@ -3,6 +3,7 @@ set nocompatible
 " Plugins {{{
 call plug#begin()
 Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
@@ -23,10 +24,20 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
+Plug 'valloric/youcompleteme'
 call plug#end()
 " }}}
 
 
+" syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" }}}
 " vim-colors-solarized {{{
 set background=light
 colorscheme solarized
@@ -149,7 +160,7 @@ inoremap <esc> <nop>
 " }}}
 
 " Autocommands {{{
-function TrimWhitespace()
+function! TrimWhitespace()
 	let old_cursor_position = getpos('.')
 	:%s/\s\+$//e
 	:silent! %s#\($\n\s*\)\+\%$##

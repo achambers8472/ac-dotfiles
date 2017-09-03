@@ -10,3 +10,6 @@
 [submodule "submodules/solarized"]
 	path = submodules/solarized
 	url = git://github.com/altercation/solarized.git
+[submodule "submodules/emacs-color-theme-solarized"]
+	path = submodules/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
