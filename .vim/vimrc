@@ -2,29 +2,30 @@ set nocompatible
 
 " Plugins {{{
 call plug#begin()
+Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'beloglazov/vim-online-thesaurus'
+Plug 'bling/vim-bufferline'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
+"Plug 'Lokaltog/vim-easymotion'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
-Plug 'altercation/vim-colors-solarized'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
-Plug 'vim-latex/vim-latex'
-Plug 'beloglazov/vim-online-thesaurus'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-surround'
 "Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'godlygeek/tabular'
-Plug 'ervandew/supertab'
-Plug 'airblade/vim-gitgutter'
 "Plug 'valloric/youcompleteme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-latex/vim-latex'
 call plug#end()
 " }}}
 
@@ -109,6 +110,7 @@ set viewoptions=folds,cursor
 if has('gui_running')
 	set guioptions=a
 	set guifont=Inconsolata\ Medium\ 14
+	"set guifont=DejaVu\ Sans\ Mono\ Book\ 12
 	set guiheadroom=0
 	set lines=999 columns=999
 endif
@@ -142,6 +144,8 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gh :Gpush<cr>
 nnoremap <leader>gl :Gpull<cr>
+nnoremap <leader>w :write<cr>
+nnoremap <leader>q :quit<cr>
 " }}}
 " Visual mode mappings {{{
 vnoremap <leader>ev :vsplit $MYVIMRC<cr>
