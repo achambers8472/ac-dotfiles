@@ -8,7 +8,8 @@ Plug 'beloglazov/vim-online-thesaurus'
 Plug 'bling/vim-bufferline'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'lervag/vimtex'
 "Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/syntastic'
@@ -110,9 +111,7 @@ set viewoptions=folds,cursor
 if has('gui_running')
 	set guioptions=a
 	set guifont=Inconsolata\ Medium\ 14
-	"set guifont=DejaVu\ Sans\ Mono\ Book\ 12
 	set guiheadroom=0
-	set lines=999 columns=999
 endif
 " highlight Search cterm=NONE ctermfg=white ctermbg=black
 " }}}
