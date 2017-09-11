@@ -84,6 +84,10 @@ alias rsync='rsync --archive --verbose --progress --partial --human-readable --c
 alias du='du --summarize --human-readable'
 alias mv='mv --interactive'
 alias df='df --human-readable'
+alias ,gs='git status'
+alias ,gc='git commit'
+alias ,gh='git push'
+alias ,gl='git pull'
 
 # Functions
 function retry {
