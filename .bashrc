@@ -50,7 +50,7 @@ export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
 prefix="${HOME}/.opt/ac-essentials"
-ac_python="${prefix}/ac-python"
+ac_python="${prefix}/submodules/ac-python"
 ac-envvar-push-front PATH \
     "${prefix}/bin" \
     "${prefix}/lib" \

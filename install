@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 source "lib/ac-bash-preamble" || exit 1
 
-target_dir="${PWD}"
-link_dir="${HOME}"
+target_dirname="${PWD}"
+link_dirname="${HOME}"
 
-targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "submodules/ac-tex" "submodules/ac-bib/bib" "submodules/ac-bib/bst" ".aspell.en.prepl" ".aspell.en.pws")
-link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf/tex/latex/ac-tex" "texmf/bibtex/bib" "texmf/bibtex/bst" ".aspell.en.prepl" ".aspell.en.pws")
+while read target_link ; do
 
-for ((i=0;i<${#targets[@]};++i))
-do
-  target="${target_dir}/${targets[i]}"
-  link_name="${link_dir}/${link_names[i]}"
+  read -ra target_link <<< "${target_link}"
+  echo $target_link
+
+  target_basename="${target_link[0]}"
+  if [[ ${#target_link[@]} == 1 ]] ; then
+    link_basename="${target_basename}"
+  elif [[ ${#target_link[@]} == 2 ]] ; then
+    link_basename="${target_link[1]}"
+  else
+    exit 1
+  fi
+
+  target="${target_dirname}/${target_basename}"
+  link_name="${link_dirname}/${link_basename}"
 
   echo "Installing ${target}..."
   if [[ -L ${link_name} ]]
@@ -40,9 +49,10 @@ do
       ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
     fi
   else
-      ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
+    mkdir --parents "$(dirname ${link_name})"
+    ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
   fi
-done
+done < "install_list.csv"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qall

@@ -43,7 +43,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " }}}
 " vim-colors-solarized {{{
-set background=dark
+set background=light
 colorscheme solarized
 " }}}
 " vim-gitgutter {{{
