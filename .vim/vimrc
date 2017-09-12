@@ -122,7 +122,7 @@ set viewoptions=folds,cursor
 " GUI options {{{
 if has('gui_running')
 	set guioptions=a
-	set guifont=Inconsolata\ Medium\ 20
+	set guifont=Inconsolata\ Medium\ 16
 	set guiheadroom=0
 endif
 " highlight Search cterm=NONE ctermfg=white ctermbg=black

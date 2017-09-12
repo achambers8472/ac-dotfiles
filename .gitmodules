@@ -1,11 +1,11 @@
 [submodule "ac-python"]
-	path = ac-python
+	path = submodules/ac-python
 	url = git@github.com:achambers8472/ac-python.git
 [submodule "texmf/tex/latex/ac-tex"]
-	path = texmf/tex/latex/ac-tex
+	path = submodules/ac-tex
 	url = git@bitbucket.org:achambers8472/ac-tex.git
 [submodule "ac-bib"]
-	path = ac-bib
+	path = submodules/ac-bib
 	url = git@bitbucket.org:achambers8472/ac-bib.git
 [submodule "submodules/solarized"]
 	path = submodules/solarized

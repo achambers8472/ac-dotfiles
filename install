@@ -4,44 +4,44 @@ source "lib/ac-bash-preamble" || exit 1
 target_dir="${PWD}"
 link_dir="${HOME}"
 
-targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf/" ".aspell.en.prepl" ".aspell.en.pws")
-link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf" ".aspell.en.prepl" ".aspell.en.pws")
+targets=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh/" ".vim/" ".vim/vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d/" ".hunspell_en_AU" ".emacs.d/init.el" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "submodules/ac-tex" "submodules/ac-bib/bib" "submodules/ac-bib/bst" ".aspell.en.prepl" ".aspell.en.pws")
+link_names=( ".bashrc" ".inputrc" ".conkyrc" ".gitconfig" ".ssh" ".vim" ".vimrc" ".taskrc" ".tmux.conf" ".bash_profile" ".emacs.d" ".hunspell_en_AU" ".emacs" ".latexmkrc" ".screenrc" ".htoprc" ".config/mc" "texmf/tex/latex/ac-tex" "texmf/bibtex/bib" "texmf/bibtex/bst" ".aspell.en.prepl" ".aspell.en.pws")
 
 for ((i=0;i<${#targets[@]};++i))
 do
-	target="${target_dir}/${targets[i]}"
-	link_name="${link_dir}/${link_names[i]}"
+  target="${target_dir}/${targets[i]}"
+  link_name="${link_dir}/${link_names[i]}"
 
-	echo "Installing ${target}..."
-	if [[ -L ${link_name} ]]
-	then
-		existing_target="$(readlink ${link_name})"
-		if [[ "${existing_target}" == ${target} ]]
-		then
-			echo "${target} already installed"
-		else
-			echo "${link_name} already linked to ${existing_target}"
-			read -p "Would you like to replace this link? (y/n): " -n 1
-			echo
-			if [[ $REPLY =~ ^[Yy]$ ]]
-			then
-				unlink "${link_name}"
-				ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
-			fi
-		fi
-	elif [[ -f ${link_name} || -d ${link_name} ]]
-	then
-		echo "A file/directory with name ${link_name} already exists"
-		read -p "Would you like to backup and replace it? (y/n): " -n 1
-		echo
-		if [[ $REPLY =~ ^[Yy]$ ]]
-		then
-			mv "${link_name}" "${link_name}.bak"
-			ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
-		fi
-	else
-			ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
-	fi
+  echo "Installing ${target}..."
+  if [[ -L ${link_name} ]]
+  then
+    existing_target="$(readlink ${link_name})"
+    if [[ "${existing_target}" == ${target} ]]
+    then
+      echo "${target} already installed"
+    else
+      echo "${link_name} already linked to ${existing_target}"
+      read -p "Would you like to replace this link? (y/n): " -n 1
+      echo
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        unlink "${link_name}"
+        ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
+      fi
+    fi
+  elif [[ -f ${link_name} || -d ${link_name} ]]
+  then
+    echo "A file/directory with name ${link_name} already exists"
+    read -p "Would you like to backup and replace it? (y/n): " -n 1
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      mv "${link_name}" "${link_name}.bak"
+      ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
+    fi
+  else
+      ln --symbolic -T "${target}" "${link_name}" || echo "Link not created"
+  fi
 done
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
