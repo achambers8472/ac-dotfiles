@@ -49,29 +49,21 @@ mkdir --mode=700 --parents "$SCREENDIR"
 export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
-prefix="${HOME}/.opt/ac-essentials"
-ac_python="${prefix}/submodules/ac-python"
 ac-envvar-push-front PATH \
-    "${prefix}/bin" \
-    "${prefix}/lib" \
-    "${HOME}/bin" \
-    "${HOME}/local/bin" \
     "${HOME}/.local/bin" \
     "${HOME}/.opt/anaconda2/bin" \
     "${HOME}/.opt/ac-chroma-utils" \
     "${HOME}/.opt/IGV_2.3.94" \
     "${HOME}/.opt/FastQC" \
     "${HOME}/.opt/picard_2.9.4" \
-	"${HOME}/.opt/GenomeAnalysisTK-3.7" \
-	"${HOME}/.opt/hisat2-2.0.4" \
-	"${HOME}/.opt/fred"
+    "${HOME}/.opt/GenomeAnalysisTK-3.7" \
+    "${HOME}/.opt/hisat2-2.0.4" \
+    "${HOME}/.opt/fred"
     # "${HOME}/local/samtools-1.5/bin" \
     # "${HOME}/local/htslib-1.5" \
     # "${HOME}/local/freebayes/bin"
-ac-envvar-push-front MANPATH \
-    "${HOME}/man" \
-    "${HOME}/share/man"
-ac-envvar-push-front PYTHONPATH "." "${ac_python}"
+ac-envvar-push-front PYTHONPATH "." "${HOME}/.opt/ac-python"
+export TEXMFHOME="${HOME}/.texmf"
 
 # Aliases
 alias ls='ls --color=auto'
@@ -101,10 +93,6 @@ function repeat {
 
 # eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
 unset LS_COLORS
-
-#if [[ "${TERM}" == "xterm" && "${COLORTERM}" == gnome-terminal ]] ; then
-	#export TERM=xterm-256color
-#fi
 
 # Host-specific settings
 case "$(ac-hostname)" in
