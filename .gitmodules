@@ -1,15 +1,15 @@
 [submodule "ac-python"]
-	path = submodules/ac-python
+	path = .opt/ac-python
 	url = git@github.com:achambers8472/ac-python.git
 [submodule "texmf/tex/latex/ac-tex"]
-	path = submodules/ac-tex
+	path = .opt/ac-tex
 	url = git@bitbucket.org:achambers8472/ac-tex.git
 [submodule "ac-bib"]
-	path = submodules/ac-bib
+	path = .opt/ac-bib
 	url = git@bitbucket.org:achambers8472/ac-bib.git
 [submodule "submodules/solarized"]
-	path = submodules/solarized
+	path = .opt/solarized
 	url = git://github.com/altercation/solarized.git
 [submodule "submodules/emacs-color-theme-solarized"]
-	path = submodules/emacs-color-theme-solarized
+	path = .opt/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git

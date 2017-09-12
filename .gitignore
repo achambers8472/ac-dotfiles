@@ -1,18 +1,5 @@
+*
+
 *.swp
 *~
 *#*#
-
-.thunderbird/achambers/*
-.thunderbird/Crash\ Reports
-
-.emacs.d/elpa
-.emacs.d/ido.last
-.emacs.d/smex-items
-.emacs.d/ac-custom.el
-.emacs.d/tramp
-.emacs.d/.python-environments
-.emacs.d/anaconda-mode
-.emacs.d/bookmarks
-.emacs.d/auto-save-list
-.emacs.d/session.*
-.emacs.d/eshell
