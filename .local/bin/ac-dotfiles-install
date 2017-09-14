@@ -5,10 +5,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 vim +PlugInstall +qall
 
 mkdir --parents "${HOME}/.texmf/tex/latex"
-ln --symbolic "${HOME}/.opt/ac-tex" "${HOME}/.texmf/tex/latex/ac-tex"
+ln --symbolic --no-dereference "${HOME}/.opt/ac-tex" "${HOME}/.texmf/tex/latex/ac-tex"
 
 mkdir --parents "${HOME}/.texmf/bibtex/bib"
-ln --symbolic "${HOME}/.opt/ac-bib/bib/ref.bib" "${HOME}/.texmf/bibtex/bib/ref.bib"
+ln --symbolic --no-dereference "${HOME}/.opt/ac-bib/bib/ref.bib" "${HOME}/.texmf/bibtex/bib/ref.bib"
 
 # Make sure permissions are correct
 chmod 700 "${HOME}/.ssh"
