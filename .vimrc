@@ -161,6 +161,8 @@ nnoremap <leader>gl :Gpull<cr>
 nnoremap <leader>w :write<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>q :quit<cr>
+
+nnoremap <leader>bd :bdelete
 " }}}
 " Visual mode mappings {{{
 vnoremap <leader>ev :vsplit $MYVIMRC<cr>
