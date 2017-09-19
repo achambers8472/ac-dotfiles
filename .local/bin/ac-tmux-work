@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ac-bash-preamble || exit 1
+set -o errexit
+set -o pipefail
+set -o nounset
 
 tmux new-session -s "Work" -n "Local" -d
 

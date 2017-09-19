@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ac-bash-preamble || exit 1
+set -o errexit
+set -o pipefail
+set -o nounset
 
 # tmux new-window -n "emacs" "while true ; do emacs -nw ; sleep 30 ; done"
 # tmux select-pane -t 0
