@@ -50,7 +50,6 @@ export HTOPRC="${HOME}/.htoprc"
 
 # PATH settings
 ac-envvar-push-front PATH \
-    "${HOME}/.local/bin" \
     "${HOME}/.opt/anaconda2/bin" \
     "${HOME}/.opt/ac-chroma-utils" \
     "${HOME}/.opt/IGV_2.3.94" \
