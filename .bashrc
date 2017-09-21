@@ -1,30 +1,15 @@
-# Load system defaults
+unset BASH_ENV
 
-# Terminal settings
-export HISTCONTROL=ignoreboth:erasedups
-export HISTSIZE=
-export HISTFILESIZE=
 shopt -s histappend
 shopt -s checkwinsize
 if [[ "${BASH_VERSION}" == 4* ]] ; then
   shopt -s globstar
 fi
-export TMOUT=0
-unset BASH_ENV
-
-# Prompt settings
-export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
-# last=$(fc -ln -0 | sed -e s/^[[:space:]]*//)
-export PS2=" > "
-export PROMPT_COMMAND="history -a; history -c; history -r"
 
 if ! shopt -oq posix; then
     source /usr/share/bash-completion/bash_completion 2>/dev/null \
         || source /etc/bash_completion 2>/dev/null
 fi
-
-# Screen settings
-mkdir --mode=700 --parents "$SCREENDIR"
 
 # Aliases
 source "${HOME}/.bash_aliases"
