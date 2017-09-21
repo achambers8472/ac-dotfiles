@@ -16,7 +16,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -26,6 +26,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 "Plug 'LaTeX-Box-Team/LaTeX-Box'
 "Plug 'valloric/youcompleteme'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'vim-latex/vim-latex'
@@ -117,6 +118,7 @@ else
 	2mat ErrorMsg '\%81v.'
 endif
 set viewoptions=folds,cursor
+set undofile
 "}}}
 
 " GUI options {{{
