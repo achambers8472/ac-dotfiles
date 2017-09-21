@@ -11,6 +11,7 @@ Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lervag/vimtex'
+Plug 'ludovicchabant/vim-gutentags'
 "Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/syntastic'
@@ -25,12 +26,13 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-"Plug 'LaTeX-Box-Team/LaTeX-Box'
-"Plug 'valloric/youcompleteme'
+" Plug 'LaTeX-Box-Team/LaTeX-Box'
+" Plug 'valloric/youcompleteme'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'vim-latex/vim-latex'
+" Plug 'w0rp/ale'
+" Plug 'vim-latex/vim-latex'
 call plug#end()
 " }}}
 
@@ -79,6 +81,7 @@ let g:airline#extensions#whitespace#enabled = 0
 " }}}
 " vimtex {{{
 let g:vimtex_fold_enabled = 1
+let g:vimtex_quickfix_latexlog = {'overfull' : 0, 'underfull' : 0}
 " }}}
 " nerdcommenter setup {{{
 let g:NERDCreateDefaultMappings = 0
@@ -155,7 +158,7 @@ nnoremap <tab> :bnext!<enter>
 nnoremap <s-tab> :bprevious!<enter>
 nnoremap qq @w
 nmap <leader>n :NERDTreeToggle<cr>
-nmap <leader>c <plug>NERDCommenterToggle
+nnoremap ,s :SyntasticToggleMode
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -167,7 +170,7 @@ nnoremap <leader>w :write<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>q :quit<cr>
 
-nnoremap <leader>bd :bdelete
+nnoremap <leader>bd :bdelete<cr>
 " }}}
 " Visual mode mappings {{{
 vnoremap <leader>ev :vsplit $MYVIMRC<cr>
