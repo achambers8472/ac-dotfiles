@@ -1,20 +1,5 @@
 # Load system defaults
 
-source /etc/bashrc > /dev/null 2>&1
-
-ac-envvar-push-front() {
-    local varname="${1}"
-    shift
-    for ((i=$#;i>0;i--)) ; do
-        newvalue="${!i}"
-        if [[ -z "${!varname:-}" ]] ; then
-            export "${varname}"="${newvalue}:"
-        elif [[ ":${!varname}:" != *":${newvalue}:"* ]] ; then
-            export "${varname}"="${newvalue}:${!varname}"
-        fi
-    done
-}
-
 # Terminal settings
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
@@ -24,7 +9,6 @@ shopt -s checkwinsize
 if [[ "${BASH_VERSION}" == 4* ]] ; then
   shopt -s globstar
 fi
-export EDITOR=vim
 export TMOUT=0
 unset BASH_ENV
 
@@ -39,31 +23,10 @@ if ! shopt -oq posix; then
         || source /etc/bash_completion 2>/dev/null
 fi
 
-# File settings
-umask 022
-
 # Screen settings
-export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
 
-export HTOPRC="${HOME}/.htoprc"
-
-# PATH settings
-ac-envvar-push-front PATH \
-    "${HOME}/.opt/anaconda2/bin" \
-    "${HOME}/.opt/ac-chroma-utils" \
-    "${HOME}/.opt/IGV_2.3.94" \
-    "${HOME}/.opt/FastQC" \
-    "${HOME}/.opt/picard_2.9.4" \
-    "${HOME}/.opt/GenomeAnalysisTK-3.7" \
-    "${HOME}/.opt/hisat2-2.0.4" \
-    "${HOME}/.opt/fred"
-    # "${HOME}/local/samtools-1.5/bin" \
-    # "${HOME}/local/htslib-1.5" \
-    # "${HOME}/local/freebayes/bin"
-ac-envvar-push-front PYTHONPATH "." "${HOME}/.opt/ac-python"
-export TEXMFHOME="${HOME}/.texmf"
-
+# Aliases
 source "${HOME}/.bash_aliases"
 
 # Functions
@@ -75,9 +38,6 @@ function repeat {
     shift;
     for i in $(seq $count) ; do eval "$@" ; done
 }
-
-# eval "$(dircolors ${AC_ESSENTIALS_DIR}/dircolors/dircolors.ansi-light)"
-unset LS_COLORS
 
 # Host-specific settings
 case "$(ac-hostname)" in
