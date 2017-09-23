@@ -5,13 +5,6 @@ ln_flags=(--symbolic --no-dereference)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qall
 
-mkdir --parents "${HOME}/.texmf/tex/latex"
-ln "${ln_flags[@]}" "${HOME}/.opt/ac-tex" "${HOME}/.texmf/tex/latex/ac-tex"
-
-mkdir --parents "${HOME}/.texmf/bibtex/bib"
-ln "${ln_flags[@]}" "${HOME}/.opt/ac-bib/bib/ref.bib" "${HOME}/.texmf/bibtex/bib/ref.bib"
-ln "${ln_flags[@]}" "${HOME}/.opt/ac-bib/bst" "${HOME}/.texmf/bibtex/bst"
-
 # Make sure permissions are correct
 chmod 700 "${HOME}/.ssh"
 chmod 600 ${HOME}/.ssh/*
