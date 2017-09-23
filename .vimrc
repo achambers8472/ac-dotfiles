@@ -5,19 +5,19 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'beloglazov/vim-online-thesaurus'
-"Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lervag/vimtex'
-Plug 'ludovicchabant/vim-gutentags'
-"Plug 'Lokaltog/vim-easymotion'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/nerdcommenter'
-"Plug 'SirVer/ultisnips'
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -26,25 +26,36 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-unimpaired'
 " Plug 'LaTeX-Box-Team/LaTeX-Box'
 " Plug 'valloric/youcompleteme'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 " Plug 'vim-latex/vim-latex'
 call plug#end()
 " }}}
 
 
+" supertab {{{
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+" }}}
+" ale {{{
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+" }}}
 " syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Only required if not using airline
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_mode_map = {"mode": "passive"}
 
 let g:syntastic_python_checkers = ['pylint']
 " }}}
@@ -102,7 +113,7 @@ let maplocalleader = "\\"
 
 let g:tex_flavor='latex'
 
-set timeoutlen=500
+set timeoutlen=200
 set showcmd
 set wildmode=list:longest
 set scrolloff=10 " Show at least 10 lines above and below cursor
@@ -148,7 +159,7 @@ noremap L $
 map <space> <Plug>(easymotion-s)
 " }}}
 " Normal mode mappings {{{
-nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>ve :split $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
 nnoremap <leader>- ddp
 nnoremap <leader>_ ddkP
@@ -173,8 +184,6 @@ nnoremap <leader>q :quit<cr>
 nnoremap <leader>bd :bdelete<cr>
 " }}}
 " Visual mode mappings {{{
-vnoremap <leader>ev :vsplit $MYVIMRC<cr>
-vnoremap <leader>sv :source $MYVIMRC<cr>
 vnoremap <tab> :bnext<enter>
 vmap <leader>n :NERDTreeToggle<cr>
 vmap <leader>c <plug>NERDCommenterToggle
