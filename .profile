@@ -19,15 +19,6 @@ export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
 export EDITOR=vim
 
-export HISTCONTROL=ignoreboth:erasedups
-export HISTSIZE=
-export HISTFILESIZE=
-export TMOUT=0
-export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
-# last=$(fc -ln -0 | sed -e s/^[[:space:]]*//)
-export PS2=" > "
-export PROMPT_COMMAND="history -a; history -c; history -r"
-
 if [ -n "$BASH_VERSION" ]; then
     if [ -f "$HOME/.bashrc" ]; then
 	source "$HOME/.bashrc"

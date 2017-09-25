@@ -16,3 +16,5 @@ alias ,gh="git push"
 alias ,gl="git pull"
 alias ,gd="git diff"
 alias ,ga="git add"
+
+alias vim="vim --servername vim"
