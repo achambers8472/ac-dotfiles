@@ -37,14 +37,15 @@ Plug 'w0rp/ale'
 call plug#end()
 " }}}
 
-
 " supertab {{{
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " }}}
+
 " ale {{{
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 " }}}
+
 " syntastic {{{
 " Only required if not using airline
 " set statusline+=%#warningmsg#
@@ -59,10 +60,12 @@ let g:syntastic_mode_map = {"mode": "passive"}
 
 let g:syntastic_python_checkers = ['pylint']
 " }}}
+
 " vim-colors-solarized {{{
 set background=light
 colorscheme solarized
 " }}}
+
 " vim-gitgutter {{{
 set updatetime=250
 if exists('&signcolumn')  " Vim 7.4.2201
@@ -71,18 +74,22 @@ else
 	let g:gitgutter_sign_column_always = 1
 endif
 " }}}
+
 " vim-easymotion setup {{{
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_do_mapping = 0
+" let g:EasyMotion_smartcase = 1
 " }}}
+
 " ultisnips {{{
-let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
 " }}}
+
 " vim-airline {{{
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
 " }}}
+
 " vim-latex {{{
 "let g:Tex_BIBINPUTS=expand('~/git/tex')
 "let g:Tex_DefaultTargetFormat='pdf'
@@ -90,12 +97,14 @@ let g:airline#extensions#whitespace#enabled = 0
 "let g:Imap_UsePlaceHolders=0
 "let g:Tex_Leader2='\'
 " }}}
+
 " vimtex {{{
 let g:vimtex_fold_enabled = 1
 let g:vimtex_quickfix_latexlog = {'overfull' : 0, 'underfull' : 0}
 " }}}
-" nerdcommenter setup {{{
-let g:NERDCreateDefaultMappings = 0
+
+" nerdcommenter {{{
+" let g:NERDCreateDefaultMappings = 0
 " }}}
 
 " Leader keys {{{
@@ -109,7 +118,6 @@ let maplocalleader = "\\"
 "set softtabstop=4 " Tabs I put in are made of tabs
 "set shiftround    " Using > and < to shift indent always rounds to a multiple of 4
 "set shiftwidth=4
-"
 
 let g:tex_flavor='latex'
 
@@ -153,23 +161,18 @@ inoremap Jk <esc>
 inoremap jK <esc>
 inoremap JK <esc>
 " }}}
+
 " Normal/Visual/Operator-Pending mappings {{{
 noremap H 0
 noremap L $
 map <space> <Plug>(easymotion-s)
 " }}}
+
 " Normal mode mappings {{{
 nnoremap <leader>ve :split $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
-nnoremap <leader>- ddp
-nnoremap <leader>_ ddkP
-nnoremap <enter> o<esc>k
-nnoremap <s-enter> O<esc>j
-nnoremap <tab> :bnext!<enter>
-nnoremap <s-tab> :bprevious!<enter>
 nnoremap qq @w
 nmap <leader>n :NERDTreeToggle<cr>
-nnoremap ,s :SyntasticToggleMode
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -183,13 +186,16 @@ nnoremap <leader>q :quit<cr>
 
 nnoremap <leader>bd :bdelete<cr>
 " }}}
+
 " Visual mode mappings {{{
 vnoremap <tab> :bnext<enter>
 vmap <leader>n :NERDTreeToggle<cr>
 vmap <leader>c <plug>NERDCommenterToggle
 " }}}
+
 " Operator-pending mappings {{{
 " }}}
+
 " Training mappings {{{
 noremap <up> <nop>
 noremap <down> <nop>
