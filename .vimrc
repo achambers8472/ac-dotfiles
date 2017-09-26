@@ -171,6 +171,8 @@ map <space> <Plug>(easymotion-s)
 " Normal mode mappings {{{
 nnoremap <leader>ve :split $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>
+nnoremap <enter> o<esc>k
+nnoremap <s-enter> O<esc>j
 nnoremap qq @w
 nmap <leader>n :NERDTreeToggle<cr>
 
