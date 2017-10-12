@@ -9,13 +9,14 @@ Plug 'beloglazov/vim-online-thesaurus'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
+Plug 'Konfekt/FastFold'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lervag/vimtex'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/nerdcommenter'
 " Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-abolish'
@@ -99,7 +100,8 @@ let g:airline#extensions#whitespace#enabled = 0
 " }}}
 
 " vimtex {{{
-let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_enabled = 0
+let g:vimtex_fold_manual = 1
 let g:vimtex_quickfix_latexlog = {'overfull' : 0, 'underfull' : 0}
 " }}}
 
@@ -187,6 +189,8 @@ nnoremap <leader>wq :wq<cr>
 nnoremap <leader>q :quit<cr>
 
 nnoremap <leader>bd :bdelete<cr>
+nnoremap <leader>bn :bnext<cr>
+nnoremap <leader>bp :bprevious<cr>
 " }}}
 
 " Visual mode mappings {{{

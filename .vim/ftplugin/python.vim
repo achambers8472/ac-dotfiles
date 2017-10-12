@@ -7,7 +7,7 @@ autocmd BufWritePre <buffer> :%s/\s\+$//e
 nnoremap <F5> :!python %:p<CR>
 
 if exists('&colorcolumn')
-	set colorcolumn=81
+	set colorcolumn=80
 else
-	2mat ErrorMsg '\%81v.'
+	2mat ErrorMsg '\%80v.'
 endif
