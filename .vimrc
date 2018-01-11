@@ -102,7 +102,7 @@ let g:airline#extensions#whitespace#enabled = 0
 " vimtex {{{
 let g:vimtex_fold_enabled = 0
 let g:vimtex_fold_manual = 1
-let g:vimtex_quickfix_latexlog = {'overfull' : 0, 'underfull' : 0}
+let g:vimtex_quickfix_latexlog = {'underfull' : 0}
 " }}}
 
 " nerdcommenter {{{
