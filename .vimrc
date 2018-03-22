@@ -33,6 +33,7 @@ Plug 'tpope/vim-surround'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 " Plug 'vim-latex/vim-latex'
 call plug#end()
@@ -229,6 +230,7 @@ augroup global
 	autocmd BufEnter * silent! lcd %:p:h
 	autocmd BufWinLeave *.* mkview
 	autocmd BufWinEnter *.* silent loadview
+	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 augroup END
 "  }}}
 
