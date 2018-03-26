@@ -64,7 +64,7 @@ let g:syntastic_python_checkers = ['pylint']
 " }}}
 
 " vim-colors-solarized {{{
-set background=light
+set background=dark
 colorscheme solarized
 " }}}
 
@@ -104,6 +104,10 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:vimtex_fold_enabled = 0
 let g:vimtex_fold_manual = 1
 let g:vimtex_quickfix_latexlog = {'underfull' : 0}
+" }}}
+
+" vimwiki{{{
+let g:vimwiki_global_ext = 0
 " }}}
 
 " nerdcommenter {{{
@@ -230,7 +234,7 @@ augroup global
 	autocmd BufEnter * silent! lcd %:p:h
 	autocmd BufWinLeave *.* mkview
 	autocmd BufWinEnter *.* silent loadview
-	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+	" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 augroup END
 "  }}}
 

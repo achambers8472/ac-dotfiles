@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+tmux new-session -s "Work" -n "Local" -d
+
+ac-tmux-common
+
+tmux select-window -t "Local"
+tmux attach-session -t "Work"

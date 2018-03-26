@@ -7,6 +7,9 @@ set -o nounset
 # tmux new-window -n "emacs" "while true ; do emacs -nw ; sleep 30 ; done"
 # tmux select-pane -t 0
 
+tmux new-window -n "vim" "while true ; do vim ; sleep 30 ; done"
+tmux select-pane -t 0
+
 tmux new-window -n "IPython" "while true ; do ipython ; sleep 30 ; done"
 tmux select-pane -t 0
 
