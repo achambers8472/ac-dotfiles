@@ -1,6 +1,6 @@
 umask 022
 
-export PATH="${HOME}/.opt/anaconda2/bin:${PATH}"
+export PATH="${HOME}/.opt/anaconda3/bin:${PATH}"
 export PATH="${HOME}/.opt/ac-chroma-utils:${PATH}"
 export PATH="${HOME}/.opt/IGV_2.3.94:${PATH}"
 export PATH="${HOME}/.opt/FastQC:${PATH}"
