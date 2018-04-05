@@ -1,6 +1,6 @@
 [submodule "ac-python"]
 	path = .opt/ac-python
-	url = git@github.com:achambers8472/ac-python.git
+	url = https://github.com/achambers8472/ac-python.git
 [submodule "ac-bib"]
 	path = .opt/ac-bib
 	url = git@bitbucket.org:achambers8472/ac-bib.git
