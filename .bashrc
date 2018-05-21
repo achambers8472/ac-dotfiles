@@ -28,10 +28,24 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
 export TMOUT=0
-export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
+# export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
 # last=$(fc -ln -0 | sed -e s/^[[:space:]]*//)
 export PS2=" > "
-# export PROMPT_COMMAND="history -a; history -c; history -r"
+
+fill="--- "
+export PS1='$fill \t\n$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
+
+function prompt_command {
+    # create a $fill of all screen width minus the time string and a space:
+    let fillsize=${COLUMNS}-9
+    fill=""
+    while [ "$fillsize" -gt "0" ]
+    do
+        fill="-${fill}" # fill with underscores to work on
+        let fillsize=${fillsize}-1
+    done
+}
+export PROMPT_COMMAND=prompt_command
 
 # Host-specific settings
 case "$(ac-hostname)" in
