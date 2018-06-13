@@ -33,16 +33,4 @@ export TMOUT=0
 export PS2=" > "
 
 fill="--- "
-export PS1='$fill \D{%F %T}\n$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] --- \u@\h:\w\n \$ '
-
-function prompt_command {
-    # create a $fill of all screen width minus the time string and a space:
-    let fillsize=${COLUMNS}-20
-    fill=""
-    while [ "$fillsize" -gt "0" ]
-    do
-        fill="-${fill}" # fill with underscores to work on
-        let fillsize=${fillsize}-1
-    done
-}
-export PROMPT_COMMAND=prompt_command
+export PS1='$(status=$? ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput sgr0)\] $(printf %$((${COLUMNS}-26))s | tr " " "=") \D{%F %T}\n \u@\h:\w\n$(printf %$((${COLUMNS}))s | tr " " "-")\n \$ '
