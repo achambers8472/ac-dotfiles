@@ -1,7 +1,7 @@
 $pdf_previewer = "start xreader";
 $pdf_update_method = 0;
-# $pdflatex = "pdflatex --shell-escape  %O  %S";
-$pdflatex = "lualatex --shell-escape  %O  %S";
+$pdflatex = "pdflatex --shell-escape  %O  %S";
+# $pdflatex = "lualatex --shell-escape  %O  %S";
 $cleanup_includes_cusdep_generated = 1;
 
 add_cus_dep('svg', 'pdf', 0, 'svg2pdf');
