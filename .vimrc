@@ -158,6 +158,8 @@ if has('gui_running')
 	set guioptions=a
 	set guifont=Inconsolata\ Medium\ 16
 	set guiheadroom=0
+else
+	highlight SpellBad cterm=underline
 endif
 " highlight Search cterm=NONE ctermfg=white ctermbg=black
 " }}}
