@@ -33,4 +33,4 @@ export TMOUT=0
 export PS2=" > "
 
 fill="--- "
-export PS1='$(status=$? ; printf %$((${COLUMNS}-26))s | tr " " "~" ; echo -n " " ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput setaf 3)\] \D{%F %T}\[$(tput sgr0)\]\n \$ ' #"\u@\h:\w"\n\n \$ '
+export PS1='\[$(tput setaf 3)\]$(status=$? ; printf %$((${COLUMNS}-31))s | tr " " "~" ; echo -n " " ; if [[ ${status} == 0 ]] ; then echo -en \[$(tput setaf 2)\] ; else echo -en \[$(tput setaf 1)\] ; fi ; printf [%03d] ${status})\[$(tput setaf 3)\] \D{%F %T%z}\n\[$(tput sgr0)\]\u@\h:\w \n\[$(tput sgr0)\] \$ ' #"\u@\h:\w"\n\n \$ '
