@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-source ac-bash-preamble || exit 1
-
-ac-print-line
-echo "$@"
-ac-print-line
