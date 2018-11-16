@@ -34,6 +34,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
+Plug 'wannesm/wmgraphviz.vim'
 Plug 'w0rp/ale'
 " Plug 'vim-latex/vim-latex'
 call plug#end()
@@ -101,9 +102,10 @@ let g:airline#extensions#whitespace#enabled = 0
 " }}}
 
 " vimtex {{{
-let g:vimtex_fold_enabled = 0
-let g:vimtex_fold_manual = 1
+let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_manual = 0
 let g:vimtex_quickfix_latexlog = {'underfull' : 0}
+let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
 
 " vimwiki{{{
