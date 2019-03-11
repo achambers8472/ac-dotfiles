@@ -1,5 +1,3 @@
-umask 022
-
 export PATH="${HOME}/.local/bin:${PATH}"
 export TEXMFHOME="${HOME}/.texmf"
 export HTOPRC="${HOME}/.htoprc"
