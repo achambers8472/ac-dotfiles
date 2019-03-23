@@ -1,6 +1,6 @@
 [submodule "emacs-color-theme-solarized"]
-	path = .opt/emacs-color-theme-solarized
+	path = src/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "solarized"]
-	path = .opt/solarized
+	path = src/solarized
 	url = https://github.com/altercation/solarized.git
