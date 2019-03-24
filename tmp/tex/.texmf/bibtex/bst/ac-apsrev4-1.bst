@@ -1,1 +1,0 @@
-../../../.opt/ac-bib/bst/ac-apsrev4-1.bst
