@@ -16,6 +16,7 @@ Plug 'lervag/vimtex'
 " Plug 'Lokaltog/vim-easymotion'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neovimhaskell/haskell-vim'
 " Plug 'scrooloose/syntastic'
 " Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/nerdcommenter'
@@ -48,6 +49,16 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " ale {{{
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
+" }}}
+
+" haskell-vim {{{
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 " }}}
 
 " syntastic {{{
