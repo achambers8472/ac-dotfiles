@@ -31,7 +31,6 @@ export HTOPRC="${HOME}/.htoprc"
 export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
 export EDITOR=vim
-export TERM="xterm-256color"
 export TMPDIR="/tmp"
 
 if [ -d "$HOME/.cargo/bin" ] ; then
