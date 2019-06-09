@@ -1,41 +1,54 @@
-; (require 'package)
-; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-initialize)
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
 ; (package-initialize)
 
-; (require 'use-package)
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode t)
+  (define-key evil-insert-state-map (kbd "<return>") 'evil-ret-and-indent)
+  (defun insert-line-below ()
+    (interactive)
+    (save-excursion
+      (evil-open-below 1)
+      (evil-normal-state)
+      )
+    )
+  (define-key evil-normal-state-map (kbd "<return>") 'insert-line-below)
+  (define-key evil-motion-state-map "H" 'evil-beginning-of-line)
+  (define-key evil-motion-state-map "L" 'evil-end-of-line)
+  )
 
-; (use-package evil
-;   :ensure t
-;   :config
-;   (evil-mode t)
-;   (define-key evil-insert-state-map (kbd "<return>") 'evil-ret-and-indent)
-;   (defun insert-line-below ()
-;     (interactive)
-;     (save-excursion
-;       (evil-open-below 1)
-;       (evil-normal-state)
-;       )
-;     )
-;   (define-key evil-normal-state-map (kbd "<return>") 'insert-line-below)
-;   (define-key evil-motion-state-map "H" 'evil-beginning-of-line)
-;   (define-key evil-motion-state-map "L" 'evil-end-of-line)
-;   )
+(use-package key-chord
+  :ensure t
+  :config
+  (setq key-chord-two-keys-delay 0.2)
+  (key-chord-mode t)
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-visual-state-map ",c" 'comment-dwim)
+  )
 
-; (use-package key-chord
-;   :ensure t
-;   :config
-;   (setq key-chord-two-keys-delay 0.2)
-;   (key-chord-mode t)
-;   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-;   (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
-;   (key-chord-define evil-visual-state-map ",c" 'comment-dwim)
-;   )
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode t)
+  )
 
-; (use-package evil-surround
-;   :ensure t
-;   :config
-;   (global-evil-surround-mode t)
-;   )
+(use-package slime
+  :ensure t
+  :config
+  (setq inferior-lisp-program "sbcl")
+  (setq slime-contribs '(slime-fancy))
+  )
 
 ; (use-package ido
 ;   :ensure t
