@@ -14,23 +14,10 @@
 
 (require 'use-package)
 
-; (package-initialize)
-
 (use-package evil
   :ensure t
   :config
   (evil-mode t)
-  (define-key evil-insert-state-map (kbd "<return>") 'evil-ret-and-indent)
-  (defun insert-line-below ()
-    (interactive)
-    (save-excursion
-      (evil-open-below 1)
-      (evil-normal-state)
-      )
-    )
-  (define-key evil-normal-state-map (kbd "<return>") 'insert-line-below)
-  (define-key evil-motion-state-map "H" 'evil-beginning-of-line)
-  (define-key evil-motion-state-map "L" 'evil-end-of-line)
   )
 
 (use-package evil-commentary
@@ -40,22 +27,21 @@
   (evil-commentary-mode)
   )
 
-(use-package key-chord
-  :ensure t
-  :after evil
-  :config
-  (setq key-chord-two-keys-delay 0.2)
-  (key-chord-mode t)
-  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
-  )
+;; (use-package key-chord
+;;   :ensure t
+;;   :after evil
+;;   :config
+;;   (setq key-chord-two-keys-delay 0.2)
+;;   (key-chord-mode t)
+;;   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+;;   (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
+;;   )
 
 (use-package evil-surround
   :ensure t
   :after evil
   :config
-  (global-evil-surround-mode t)
-  )
+  (global-evil-surround-mode t))
 
 (use-package slime
   :ensure t
@@ -86,14 +72,14 @@
   (ido-ubiquitous-mode 1)
   )
 
-; (use-package smex
-;   :ensure t
-;   :config
-;   (smex-initialize)
-;   (global-set-key (kbd "M-x") 'smex)
-;   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-;   )
+(use-package smex
+  :ensure t
+  :config
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+  )
 
 (use-package magit
   :ensure t
@@ -101,9 +87,24 @@
 
 (use-package flycheck
   :ensure t
-  :init
+  :config
   (global-flycheck-mode)
   )
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  )
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(electric-pair-mode t)
 
 ; (use-package fill-column-indicator
 ;   :ensure t)
@@ -155,7 +156,6 @@
 ; (add-to-list 'default-frame-alist '(font . "Inconsolata-16" ))
 ; (if (display-graphic-p) (set-face-attribute 'default t :font "Inconsolata-16" ))
 
-; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; (define-key global-map (kbd "RET") 'newline-and-indent)
 
@@ -182,3 +182,17 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (smex evil-unimpaired rainbow-delimiters company company-mode use-package slime magit key-chord ido-vertical-mode ido-completing-read+ flycheck evil-surround evil-nerd-commenter evil-commentary))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
