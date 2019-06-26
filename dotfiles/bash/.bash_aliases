@@ -8,7 +8,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias ll="ls -lahF"
-alias emacs="emacs --no-window-system"
 alias watch="watch --difference=cumulative"
 alias rsync="rsync --archive --verbose --progress --partial --human-readable --compress"
 alias du="du --summarize --human-readable"
