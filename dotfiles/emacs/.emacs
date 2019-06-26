@@ -1,3 +1,9 @@
+;;; package --- Summary
+
+;;; Commentary:
+
+;;; Code:
+
 (package-initialize)
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -27,18 +33,26 @@
   (define-key evil-motion-state-map "L" 'evil-end-of-line)
   )
 
+(use-package evil-commentary
+  :ensure t
+  :after evil
+  :config
+  (evil-commentary-mode)
+  )
+
 (use-package key-chord
   :ensure t
+  :after evil
   :config
   (setq key-chord-two-keys-delay 0.2)
   (key-chord-mode t)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
-  (key-chord-define evil-visual-state-map ",c" 'comment-dwim)
   )
 
 (use-package evil-surround
   :ensure t
+  :after evil
   :config
   (global-evil-surround-mode t)
   )
@@ -50,25 +64,27 @@
   (setq slime-contribs '(slime-fancy))
   )
 
-; (use-package ido
-;   :ensure t
-;   :config
-;   (ido-mode t)
-;   (ido-everywhere t)
-;   )
+(use-package ido
+  :ensure t
+  :config
+  (ido-mode t)
+  (ido-everywhere t)
+  )
 
-; (use-package ido-vertical-mode
-;   :ensure t
-;   :config
-;   (ido-vertical-mode t)
-;   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-; )
+(use-package ido-vertical-mode
+  :ensure t
+  :after ido
+  :config
+  (ido-vertical-mode t)
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+)
 
-; (use-package ido-completing-read+
-;   :ensure t
-;   :config
-;   (ido-ubiquitous-mode t)
-;   )
+(use-package ido-completing-read+
+  :ensure t
+  :after ido
+  :config
+  (ido-ubiquitous-mode 1)
+  )
 
 ; (use-package smex
 ;   :ensure t
@@ -79,14 +95,15 @@
 ;   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 ;   )
 
-; (use-package magit
-;   :ensure t)
+(use-package magit
+  :ensure t
+  )
 
-; (use-package flycheck
-;   :ensure t
-;   :init
-;   (global-flycheck-mode)
-;   )
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  )
 
 ; (use-package fill-column-indicator
 ;   :ensure t)
@@ -162,3 +179,6 @@
 ; (setq tramp-use-ssh-controlmaster-options nil)
 
 ; (global-linum-mode t) ;; Line numbers
+
+(provide '.emacs)
+;;; .emacs ends here
