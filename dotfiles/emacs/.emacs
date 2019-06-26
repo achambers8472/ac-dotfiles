@@ -128,6 +128,9 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
+(setq custom-file "~/.emacs-custom.el")
+(if (file-exists-p custom-file) (load custom-file))
+
 ; (use-package fill-column-indicator
 ;   :ensure t)
 
@@ -162,9 +165,6 @@
 
 
 ; (tool-bar-mode nil)
-
-; (setq custom-file "~/.emacs.d/ac-custom.el")
-; (if (file-exists-p custom-file) (load custom-file))
 
 ; (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
 ;       backup-by-copying t
@@ -204,17 +204,3 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (haskell-mode rust-mode vimrc-mode markdown-mode company-jedi smex evil-unimpaired rainbow-delimiters company company-mode use-package slime magit key-chord ido-vertical-mode ido-completing-read+ flycheck evil-surround evil-nerd-commenter evil-commentary))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
