@@ -77,8 +77,8 @@ let g:syntastic_python_checkers = ['pylint']
 " }}}
 
 " vim-colors-solarized {{{
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 " }}}
 
 " vim-gitgutter {{{
