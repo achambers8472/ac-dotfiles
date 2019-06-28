@@ -123,6 +123,9 @@
 (use-package haskell-mode
   :ensure t)
 
+(use-package yaml-mode
+  :ensure t)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (electric-pair-mode t)
 (show-paren-mode t)
