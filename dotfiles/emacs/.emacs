@@ -27,15 +27,15 @@
   (evil-commentary-mode)
   )
 
-;; (use-package key-chord
-;;   :ensure t
-;;   :after evil
-;;   :config
-;;   (setq key-chord-two-keys-delay 0.2)
-;;   (key-chord-mode t)
-;;   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-;;   (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
-;;   )
+(use-package key-chord
+  :ensure t
+  :after evil
+  :config
+  (setq key-chord-two-keys-delay 0.2)
+  (key-chord-mode t)
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
+  )
 
 (use-package evil-surround
   :ensure t
