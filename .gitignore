@@ -4,3 +4,4 @@
 dotfiles/vim/.vim/view
 dotfiles/vim/.vim/autoload
 dotfiles/vim/.vim/plugged
+dotfiles/vim/.vim/.netrwhist
