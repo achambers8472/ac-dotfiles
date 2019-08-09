@@ -128,8 +128,14 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (electric-pair-mode t)
+(defvar show-paren-delay 0)
 (show-paren-mode t)
-(setq show-paren-delay 0)
+
+(when (display-graphic-p)
+  (use-package dracula-theme
+    :ensure t)
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16" ))
+  )
 
 (setq custom-file "~/.emacs-custom.el")
 (if (file-exists-p custom-file) (load custom-file))
