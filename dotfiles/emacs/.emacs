@@ -43,9 +43,6 @@
   :config
   (global-evil-surround-mode t))
 
-(use-package dracula-theme
-  :ensure )
-
 (use-package slime
   :ensure t
   :config
@@ -134,8 +131,11 @@
 (defvar show-paren-delay 0)
 (show-paren-mode t)
 (setq visible-bell t)
-(add-to-list 'default-frame-alist
-	     '(font . "DejaVu Sans Mono-16" ))
+
+(when (display-graphic-p)
+  (use-package dracula-theme
+    :ensure t)
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16" )))
 
 (setq custom-file "~/.emacs-custom.el")
 (if (file-exists-p custom-file) (load custom-file))
