@@ -89,6 +89,7 @@
   :ensure t
   :config
   (global-flycheck-mode)
+  (setq flycheck-check-syntax-automatically '(save mode-enable))
   )
 
 (use-package company
