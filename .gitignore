@@ -5,3 +5,9 @@ dotfiles/vim/.vim/view
 dotfiles/vim/.vim/autoload
 dotfiles/vim/.vim/plugged
 dotfiles/vim/.vim/.netrwhist
+dotfiles/stack/.stack/stack.sqlite3
+dotfiles/stack/.stack/stack.sqlite3.pantry-write-lock
+dotfiles/stack/.stack/programs
+dotfiles/stack/.stack/templates
+dotfiles/stack/.stack/pantry
+dotfiles/stack/.stack/global-project
