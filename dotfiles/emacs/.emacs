@@ -111,7 +111,9 @@
   )
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'markdown-mode-hook 'flyspell-mode))
 
 (use-package vimrc-mode
   :ensure t
