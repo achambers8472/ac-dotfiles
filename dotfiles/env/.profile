@@ -36,3 +36,9 @@ export TMPDIR="/tmp"
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+if [ -d "$HOME/.profile.d" ] ; then
+    for f in "$HOME/.profile.d"/* ; do
+	source "${f}"
+    done
+fi
