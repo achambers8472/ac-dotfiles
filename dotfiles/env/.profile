@@ -30,7 +30,7 @@ export TEXMFHOME="${HOME}/.texmf"
 export HTOPRC="${HOME}/.htoprc"
 export SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
-export EDITOR=vim
+export EDITOR=vi
 export TMPDIR="/tmp"
 
 if [ -d "$HOME/.cargo/bin" ] ; then
