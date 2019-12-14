@@ -1,5 +1,11 @@
 set nocompatible
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source "$MYVIMRC
+endif
+
 " Plugins {{{
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
@@ -93,6 +99,7 @@ endif
 " vim-easymotion setup {{{
 " let g:EasyMotion_do_mapping = 0
 " let g:EasyMotion_smartcase = 1
+" "map <space> <Plug>(easymotion-s)
 " }}}
 
 " ultisnips {{{
@@ -126,19 +133,18 @@ let g:vimwiki_global_ext = 0
 
 " nerdcommenter {{{
 " let g:NERDCreateDefaultMappings = 0
+vmap <leader>c <plug>NERDCommenterToggle
+" }}}
+
+" nerdtree {{{
+nmap <leader>n :NERDTreeToggle<cr>
+vmap <leader>n :NERDTreeToggle<cr>
 " }}}
 
 " Leader keys {{{
 let mapleader = ","
 let maplocalleader = "\\"
 " }}}
-
-" Global options {{{
-"set noexpandtab   " Inserted tabs are ACTUALLY tabs
-"set tabstop=4     " Existings tabs are shown to be 4 columns wide
-"set softtabstop=4 " Tabs I put in are made of tabs
-"set shiftround    " Using > and < to shift indent always rounds to a multiple of 4
-"set shiftwidth=4
 
 let g:tex_flavor='latex'
 
@@ -159,9 +165,9 @@ set linebreak
 set hidden
 " Display options
 if exists('&colorcolumn')
-	set colorcolumn=81
+    set colorcolumn=81
 else
-	2mat ErrorMsg '\%81v.'
+    2mat ErrorMsg '\%81v.'
 endif
 set viewoptions=folds,cursor
 set undofile
@@ -188,7 +194,6 @@ inoremap JK <esc>
 " Normal/Visual/Operator-Pending mappings {{{
 noremap H 0
 noremap L $
-map <space> <Plug>(easymotion-s)
 " }}}
 
 " Normal mode mappings {{{
@@ -197,7 +202,6 @@ nnoremap <leader>vs :source $MYVIMRC<cr>
 nnoremap <enter> o<esc>k
 nnoremap <s-enter> O<esc>j
 nnoremap qq @w
-nmap <leader>n :NERDTreeToggle<cr>
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -216,23 +220,9 @@ nnoremap <leader>bp :bprevious<cr>
 
 " Visual mode mappings {{{
 vnoremap <tab> :bnext<enter>
-vmap <leader>n :NERDTreeToggle<cr>
-vmap <leader>c <plug>NERDCommenterToggle
 " }}}
 
 " Operator-pending mappings {{{
-" }}}
-
-" Training mappings {{{
-" noremap <up> <nop>
-" noremap <down> <nop>
-" noremap <left> <nop>
-" noremap <right> <nop>
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
-" inoremap <esc> <nop>
 " }}}
 
 " Autocommands {{{

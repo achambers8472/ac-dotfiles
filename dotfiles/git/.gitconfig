@@ -2,7 +2,7 @@
 	name = Alexander Chambers
 	email = alexander.chambers8427@gmail.com
 [core]
-	editor = vim
+	editor = vi
 	pager = less -r
 [color]
 	ui = auto
