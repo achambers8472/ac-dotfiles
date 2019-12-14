@@ -2,5 +2,3 @@
 # Must therefore make sure if this file exists, it sources .profile
 
 source "${HOME}/.profile"
-
-export PATH="$HOME/.cargo/bin:$PATH"
