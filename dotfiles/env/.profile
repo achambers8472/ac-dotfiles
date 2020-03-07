@@ -26,12 +26,12 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export TEXMFHOME="${HOME}/.texmf"
-export HTOPRC="${HOME}/.htoprc"
-export SCREENDIR="$HOME/.screen"
+TEXMFHOME="${HOME}/.texmf"
+HTOPRC="${HOME}/.htoprc"
+SCREENDIR="$HOME/.screen"
 mkdir --mode=700 --parents "$SCREENDIR"
-export EDITOR=vi
-export TMPDIR="/tmp"
+EDITOR=vi
+TMPDIR="/tmp"
 
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"

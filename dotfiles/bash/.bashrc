@@ -10,14 +10,14 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-export HISTCONTROL=ignoreboth:erasedups
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=
-export HISTFILESIZE=
+HISTSIZE=
+HISTFILESIZE=
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -74,18 +74,27 @@ xterm*|rxvt*)
     ;;
 esac
 
-# separator='='
-# export PROMPT_COMMAND='status=$?; _line_width=$(((${COLUMNS} - 7)/2)); tput setaf 3; printf %${_line_width}s | tr " " "${separator}" ; if [[ ${status} == 0 ]] ; then tput setaf 2 ; else tput setaf 1 ; fi ; printf " [%03d] " ${status}; tput setaf 3 ; printf %${_line_width}s | tr " " "${separator}" ; echo ; tput sgr0'
-# export PS1='\u@\h:\w\$ '
-# export PS2=" > "
-
-# enable color support of ls
+# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# separator='='
+# PROMPT_COMMAND='status=$?; _line_width=$(((${COLUMNS} - 7)/2)); tput setaf 3; printf %${_line_width}s | tr " " "${separator}" ; if [[ ${status} == 0 ]] ; then tput setaf 2 ; else tput setaf 1 ; fi ; printf " [%03d] " ${status}; tput setaf 3 ; printf %${_line_width}s | tr " " "${separator}" ; echo ; tput sgr0'
+# PS1='\u@\h:\w\$ '
+# PS2=" > "
+
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
