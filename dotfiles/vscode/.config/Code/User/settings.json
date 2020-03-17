@@ -3,6 +3,10 @@
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
     "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "python.testing.pytestArgs": [
+        "-o",
+        "junit_family=xunit1"
+    ],
     "files.exclude": {
         "*~": true
     }
