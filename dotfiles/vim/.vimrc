@@ -12,7 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'beloglazov/vim-online-thesaurus'
 " Plug 'bling/vim-bufferline'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'Konfekt/FastFold'
@@ -49,7 +49,7 @@ call plug#end()
 " }}}
 
 " supertab {{{
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " }}}
 
 " ale {{{
