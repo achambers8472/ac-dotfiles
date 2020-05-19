@@ -1,9 +1,0 @@
-"\e[A": history-search-backward
-"\e[B": history-search-forward
-
-set bell-style none
-#set show-all-if-unmodified on
-#set show-all-if-ambiguous on
-
-"\e[1~": beginning-of-line
-"\e[4~": end-of-line
