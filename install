@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd src
-stow --verbose --target="${HOME}" *
-cd -
+cwd="${PWD}"
+cd src && stow --verbose --target="${HOME}" *
+cd "${cwd}"
