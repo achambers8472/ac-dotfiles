@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source ac-bash-preamble || exit 1
-
-youtube-dl -ix --audio-format "mp3" --audio-quality 128K "${1}"
